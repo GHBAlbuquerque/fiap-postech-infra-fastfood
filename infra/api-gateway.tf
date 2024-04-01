@@ -53,7 +53,7 @@ output "api_gateway_id" {
   value = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
 }
 
-output "hello_dev" {
+output "dev_env" {
   value = "${aws_api_gateway_stage.dev.invoke_url}/hello"
 }
 

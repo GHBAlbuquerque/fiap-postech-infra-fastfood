@@ -15,6 +15,6 @@ variable "lambda_name" {
 }
 
 variable "lambda_arn" {
-  default = ""
+  default = "arn:aws:lambda:us-east-1:211125478754:function:postech-lambda-auth-fastfood"
 }
 
