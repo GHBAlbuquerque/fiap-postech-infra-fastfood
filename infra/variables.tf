@@ -27,17 +27,17 @@ variable "subnet_id_a" {
 }
 
 variable "subnet_id_b" {
-  deafult = "subnet-023c0926286854cc1"
+  default = "subnet-023c0926286854cc1"
 }
 
 variable "subnet_id_c" {
-  deafult = "subnet-06bfe0041e39d1b38"
+  default = "subnet-06bfe0041e39d1b38"
 }
 
 variable "subnet_id_d" {
-  deafult = "subnet-00decacbc2f6540ed"
+  default = "subnet-00decacbc2f6540ed"
 }
 
 variable "subnet_id_e" {
-  deafult = "subnet-0cc96aea146f03bc4"
+  default = "subnet-0cc96aea146f03bc4"
 }
