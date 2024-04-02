@@ -23,7 +23,7 @@ variable "lab_role_arn" {
 }
 
 variable "subnet_id_a" {
-  deafult = "subnet-0a9a5b3113f41772a"
+  default = "subnet-0a9a5b3113f41772a"
 }
 
 variable "subnet_id_b" {
