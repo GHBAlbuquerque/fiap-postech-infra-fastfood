@@ -20,41 +20,48 @@ resource "aws_api_gateway_method" "proxy" {
   authorization = "NONE"
 }
 
-resource "aws_api_gateway_integration" "lambda" {
-  rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
-  resource_id = aws_api_gateway_method.proxy.resource_id
-  http_method = aws_api_gateway_method.proxy.http_method
+#resource "aws_api_gateway_integration" "lambda" {
+#  rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
+#  resource_id = aws_api_gateway_method.proxy.resource_id
+#  http_method = aws_api_gateway_method.proxy.http_method
+#
+#  integration_http_method = "POST"
+#  type                    = "AWS_PROXY"
+#  uri                     = "arn:aws:apigateway:${var.region}:lambda:path/2015-03-31/functions/${var.lambda_arn}:$${stageVariables.stage}/invocations"
+#} //TODO
 
-  integration_http_method = "POST"
-  type                    = "AWS_PROXY"
-  uri                     = "arn:aws:apigateway:${var.region}:lambda:path/2015-03-31/functions/${var.lambda_arn}:$${stageVariables.stage}/invocations"
-} //TODO
+#resource "aws_api_gateway_deployment" "deployment_dev" {
+#  depends_on = [
+#    aws_api_gateway_integration.lambda
+#  ]
+#
+#  rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
+#}
 
-resource "aws_api_gateway_deployment" "deployment_dev" {
-  depends_on = [
-    aws_api_gateway_integration.lambda
-  ]
 
-  rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
-}
-  
-
-resource "aws_api_gateway_stage" "dev" {
-  deployment_id = aws_api_gateway_deployment.deployment_dev.id
-  rest_api_id   = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
-  stage_name    = "dev"
-
-  variables = {
-    "stage" = "dev"
-  }
-}
+#resource "aws_api_gateway_stage" "dev" {
+#  deployment_id = aws_api_gateway_deployment.deployment_dev.id
+#  rest_api_id   = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
+#  stage_name    = "dev"
+#
+#  variables = {
+#    "stage" = "dev"
+#  }
+#}
 
 output "api_gateway_id" {
   value = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
 }
 
-output "dev_env" {
-  value = "${aws_api_gateway_stage.dev.invoke_url}/hello"
+#output "dev_env" {
+#  value = "${aws_api_gateway_stage.dev.invoke_url}/hello"
+#}
+
+resource "aws_api_gateway_authorizer" "demo" {
+  name                   = "demo"
+  rest_api_id            = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
+  authorizer_uri         = var.lambda_arn
+  authorizer_credentials = var.lab_role_arn
 }
 
 
