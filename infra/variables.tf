@@ -23,21 +23,21 @@ variable "lab_role_arn" {
 }
 
 variable "subnet_id_a" {
-  default = "subnet-0a9a5b3113f41772a"
+  default = "subnet-0226b059f9bb3e97b"
 }
 
 variable "subnet_id_b" {
-  default = "subnet-023c0926286854cc1"
+  default = "subnet-094d8c1602642bf95"
 }
 
 variable "subnet_id_c" {
-  default = "subnet-06bfe0041e39d1b38"
+  default = "subnet-02a64d0abe9230131"
 }
 
 variable "subnet_id_d" {
-  default = "subnet-00decacbc2f6540ed"
+  default = "subnet-096ff3a74878067c5"
 }
 
 variable "subnet_id_e" {
-  default = "subnet-0cc96aea146f03bc4"
+  default = "subnet-044446105935a3cd7"
 }

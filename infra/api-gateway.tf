@@ -57,12 +57,12 @@ output "api_gateway_id" {
 #  value = "${aws_api_gateway_stage.dev.invoke_url}/hello"
 #}
 
-resource "aws_api_gateway_authorizer" "demo" {
-  name                   = "demo"
-  rest_api_id            = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
-  authorizer_uri         = var.lambda_arn
-  authorizer_credentials = var.lab_role_arn
-}
+#resource "aws_api_gateway_authorizer" "demo" {
+#  name                   = "demo"
+#  rest_api_id            = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
+#  authorizer_uri         = var.lambda_arn
+#  authorizer_credentials = var.lab_role_arn
+#}
 
 
 resource "aws_lambda_permission" "lambda_permission" {
