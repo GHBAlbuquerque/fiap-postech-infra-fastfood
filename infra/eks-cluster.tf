@@ -47,3 +47,43 @@ resource "aws_eks_node_group" "eks_node_group_fiap_postech" {
 #    aws_iam_role_policy_attachment.example-AmazonEC2ContainerRegistryReadOnly,
 #  ]
 }
+
+// lets assume we have two target group arn.
+// one points to node port 80 and one to 30000
+#resource "aws_lb" "nlb-cluster-fiap" {
+#  name               = "nlb-cluster-fiap"
+#  internal           = false
+#  load_balancer_type = "network"
+#  subnets            =  [var.subnet_id_a, var.subnet_id_b, var.subnet_id_c, var.subnet_id_d]
+#
+#  enable_deletion_protection = true
+#
+#  target_groups = [
+#    {
+#      name_prefix      = "${local.target_group_names[0]}-"
+#      backend_protocol = "TCP"
+#      backend_port     = 80
+#      target_type      = "instance"
+#    },
+#    {
+#      name_prefix      = "${local.target_group_names[1]}-"
+#      backend_protocol = "TCP"
+#      backend_port     = 30000
+#      target_type      = "instance"
+#    }
+#  ]
+#
+#  http_tcp_listeners = [
+#    {
+#      port               = 80
+#      protocol           = "TCP"
+#      target_group_index = 0
+#    },
+#    {
+#      port               = 81
+#      protocol           = "TCP"
+#      target_group_index = 1
+#    }
+#  ]
+#
+#}

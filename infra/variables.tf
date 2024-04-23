@@ -22,6 +22,10 @@ variable "lab_role_arn" {
   default = "arn:aws:iam::211125478754:role/LabRole"
 }
 
+variable "vpc_id" {
+  default = "vpc-07dec253c1b5a77ea"
+}
+
 variable "subnet_id_a" {
   default = "subnet-0226b059f9bb3e97b"
 }
