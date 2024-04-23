@@ -18,7 +18,8 @@ resource "aws_api_gateway_method" "first_endpoint_method" {
   resource_id   = aws_api_gateway_resource.first_endpoint.id
   http_method   = "GET"
   authorization = "CUSTOM"
-  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer_cpf.arn
+  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer_cpf.name
+
 }
 
 /*resource "aws_api_gateway_integration" "MyDemoIntegration" {
