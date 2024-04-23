@@ -13,12 +13,12 @@ resource "aws_api_gateway_resource" "first_endpoint" {
   path_part   = "products"
 }
 
-resource "aws_api_gateway_method" "proxy" {
+resource "aws_api_gateway_method" "first_endpoint_method" {
   rest_api_id   = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
   resource_id   = aws_api_gateway_resource.first_endpoint.id
   http_method   = "GET"
   authorization = "CUSTOM"
-  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer_cpf
+  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer_cpf.arn
 }
 
 /*resource "aws_api_gateway_integration" "MyDemoIntegration" {
