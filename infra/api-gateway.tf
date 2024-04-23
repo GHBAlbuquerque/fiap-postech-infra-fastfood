@@ -14,11 +14,12 @@ resource "aws_api_gateway_resource" "first_endpoint" {
 }
 
 resource "aws_api_gateway_method" "first_endpoint_method" {
+  depends_on    = [aws_api_gateway_authorizer.lambda_authorizer_cpf]
   rest_api_id   = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
   resource_id   = aws_api_gateway_resource.first_endpoint.id
   http_method   = "GET"
   authorization = "CUSTOM"
-  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer_cpf.name
+  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer_cpf.id
 
 }
 
