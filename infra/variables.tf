@@ -45,3 +45,7 @@ variable "subnet_id_d" {
 variable "subnet_id_e" {
   default = "subnet-044446105935a3cd7"
 }
+
+variable "load_balancer_eks_dns" {
+  default = "a07e02eddfe6d479e91fa2b99d4be427-516352852.us-east-1.elb.amazonaws.com"
+}
