@@ -1,4 +1,5 @@
 resource "aws_alb" "alb-cluster-fiap" {
+  depends_on = [aws_eks_cluster.eks_cluster_fiap_postech]
   name               = "nlb-cluster-fiap"
   internal = false
   load_balancer_type = "application"
@@ -23,6 +24,7 @@ resource "aws_lb_target_group" "target-group-cluster-fiap" {
 }
 
 resource "aws_lb_target_group_attachment" "attach" {
+  depends_on = [aws_eks_cluster.eks_cluster_fiap_postech]
   target_group_arn = aws_lb_target_group.target-group-cluster-fiap.arn
   target_id = data.aws_instance.ec2.id
   port = 30007
