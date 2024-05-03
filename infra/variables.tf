@@ -27,7 +27,7 @@ variable "vpc_id" {
 }
 
 variable "vpc_cidr_block" {
-  default = ""
+  default = "172.31.0.0/16"
 }
 
 variable "subnet_id_a" {
@@ -55,7 +55,7 @@ variable "instance_type" {
 }
 
 variable "principal_arn" {
-  default = "arn:aws:iam::<account-id>:role/voclabs"
+  default = "arn:aws:iam::067184771399:role/voclabs"
 }
 
 variable "policy_arn" {
