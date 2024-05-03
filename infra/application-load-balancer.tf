@@ -17,7 +17,7 @@ resource "aws_lb_target_group" "target-group-cluster-fiap" {
   vpc_id = var.vpc_id
 
   health_check {
-    path = "/"
+    path = "/actuator/health"
     port = 30007
     matcher = "200"
   }
@@ -32,7 +32,7 @@ resource "aws_lb_target_group_attachment" "attach" {
 
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_alb.alb-cluster-fiap.arn
-  port = "8080" #era porta 80 no exemplo
+  port = "80" #era porta 80 no exemplo
   protocol = "HTTP"
 
   default_action {
