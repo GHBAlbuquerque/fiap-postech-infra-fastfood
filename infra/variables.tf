@@ -26,6 +26,10 @@ variable "vpc_id" {
   default = "vpc-0c33afcdadaa4be7b"
 }
 
+variable "vpc_cidr_block" {
+  default = ""
+}
+
 variable "subnet_id_a" {
   default = "subnet-092106de434121bca"
 }
@@ -46,6 +50,16 @@ variable "subnet_id_e" {
   default = "subnet-0bdae3752039a482f"
 }
 
-//variable "load_balancer_eks_dns" {
-//  default = "a07e02eddfe6d479e91fa2b99d4be427-516352852.us-east-1.elb.amazonaws.com"
-//}
+variable "instance_type" {
+  default = "t3a.medium"
+}
+
+variable "principal_arn" {
+  default = "arn:aws:iam::<account-id>:role/voclabs"
+}
+
+variable "policy_arn" {
+  default = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+}
+
+
