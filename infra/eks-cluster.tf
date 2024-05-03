@@ -3,7 +3,7 @@ resource "aws_eks_cluster" "eks_cluster_fiap_postech" {
   role_arn = var.lab_role_arn
 
   vpc_config {
-    subnet_ids = [var.subnet_id_a, var.subnet_id_b, var.subnet_id_c, var.subnet_id_d]
+    subnet_ids         = [var.subnet_id_a, var.subnet_id_b, var.subnet_id_c, var.subnet_id_d]
     security_group_ids = [aws_security_group.sg.id]
   }
 }
@@ -13,7 +13,7 @@ resource "aws_eks_node_group" "eks_node_group_fiap_postech" {
   node_group_name = "eks_node_group_fiap_postech"
   node_role_arn   = var.lab_role_arn
   subnet_ids      = [var.subnet_id_a, var.subnet_id_b, var.subnet_id_c, var.subnet_id_d]
-  instance_types = [var.instance_type]
+  instance_types  = [var.instance_type]
 
   scaling_config {
     desired_size = 1
