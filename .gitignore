@@ -1,3 +1,4 @@
 /.idea/
 /infra/.terraform/
 /infra/.terraform.lock.hcl
+.DS_Store
