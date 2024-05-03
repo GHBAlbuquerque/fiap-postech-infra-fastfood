@@ -51,7 +51,7 @@ variable "subnet_id_e" {
 }
 
 variable "instance_type" {
-  default = "t3a.medium"
+  default = "t3.medium"
 }
 
 variable "principal_arn" {

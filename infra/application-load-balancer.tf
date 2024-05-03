@@ -30,7 +30,7 @@ resource "aws_lb_target_group_attachment" "attach" {
 
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_alb.alb-cluster-fiap.arn
-  port = "80"
+  port = "8080" #era porta 80 no exemplo
   protocol = "HTTP"
 
   default_action {
