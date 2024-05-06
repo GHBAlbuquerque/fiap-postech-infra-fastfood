@@ -1,7 +1,6 @@
 resource "aws_security_group" "sg" {
-  name_prefix = "sec-group-cluster-fiap"
   name        = "sec-group-cluster-fiap"
-  description = "Seucirty Group for EKS Cluster"
+  description = "Security Group for EKS Cluster"
   vpc_id      = var.vpc_id
 
   ingress {
