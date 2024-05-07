@@ -14,7 +14,8 @@ resource "aws_api_gateway_method" "endpoint_get_products_method" {
   authorizer_id = aws_api_gateway_authorizer.lambda_authorizer_cpf.id
 
   request_parameters = {
-    "method.request.querystring.category" = true
+    "method.request.querystring.category" = true,
+    "method.request.header.Authorization" = true
   }
 }
 
@@ -31,8 +32,7 @@ resource "aws_api_gateway_integration" "endpoint_get_products_integration" {
   content_handling        = "CONVERT_TO_TEXT"
 
   request_parameters = {
-    "integration.request.method.X-Authorization" = "'static'",
-    "integration.request.method.Authorization" = "'static'",
+    "integration.request.header.Authorization" = "'static'",
     "integration.request.querystring.category" = "'static'",
   }
 
