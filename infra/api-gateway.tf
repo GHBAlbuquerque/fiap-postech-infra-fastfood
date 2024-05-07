@@ -1,4 +1,7 @@
 resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
+  name = "api_gateway_fiap_postech"
+  description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
+
   body = jsonencode(
     {
       "openapi" : "3.0.1",
@@ -148,78 +151,78 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
           }
         },
         "/products" : {
-          "get" : {
-            "tags" : [
-              "product-controller"
-            ],
-            "operationId" : "findProduct",
-            "parameters" : [
-              {
-                "name" : "category",
-                "in" : "query",
-                "required" : true,
-                "schema" : {
-                  "type" : "string",
-                  "enum" : [
-                    "SANDWICH",
-                    "SIDE_DISH",
-                    "DRINK"
-                  ]
-                }
-              }
-            ],
-            "responses" : {
-              "400" : {
-                "description" : "Bad Request",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
-                  }
-                }
-              },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
-                  }
-                }
-              },
-              "404" : {
-                "description" : "Not Found",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
-                  }
-                }
-              },
-              "200" : {
-                "description" : "Success",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "type" : "array",
-                      "items" : {
-                        "$ref" : "#/components/schemas/BaseProductResponse"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            x-amazon-apigateway-integration = {
-              httpMethod           = "GET"
-              payloadFormatVersion = "1.0"
-              type                 = "HTTP_PROXY"
-              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
-            }
-          },
+#          "get" : {
+#            "tags" : [
+#              "product-controller"
+#            ],
+#            "operationId" : "findProduct",
+#            "parameters" : [
+#              {
+#                "name" : "category",
+#                "in" : "query",
+#                "required" : true,
+#                "schema" : {
+#                  "type" : "string",
+#                  "enum" : [
+#                    "SANDWICH",
+#                    "SIDE_DISH",
+#                    "DRINK"
+#                  ]
+#                }
+#              }
+#            ],
+#            "responses" : {
+#              "400" : {
+#                "description" : "Bad Request",
+#                "content" : {
+#                  "application/json" : {
+#                    "schema" : {
+#                      "$ref" : "#/components/schemas/ExceptionDetails"
+#                    }
+#                  }
+#                }
+#              },
+#              "500" : {
+#                "description" : "Internal Server Error",
+#                "content" : {
+#                  "application/json" : {
+#                    "schema" : {
+#                      "$ref" : "#/components/schemas/ExceptionDetails"
+#                    }
+#                  }
+#                }
+#              },
+#              "404" : {
+#                "description" : "Not Found",
+#                "content" : {
+#                  "application/json" : {
+#                    "schema" : {
+#                      "$ref" : "#/components/schemas/ExceptionDetails"
+#                    }
+#                  }
+#                }
+#              },
+#              "200" : {
+#                "description" : "Success",
+#                "content" : {
+#                  "application/json" : {
+#                    "schema" : {
+#                      "type" : "array",
+#                      "items" : {
+#                        "$ref" : "#/components/schemas/BaseProductResponse"
+#                      }
+#                    }
+#                  }
+#                }
+#              }
+#            },
+#            x-amazon-apigateway-integration = {
+#              httpMethod           = "GET"
+#              payloadFormatVersion = "1.0"
+#              type                 = "HTTP_PROXY"
+#              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
+#            }
+#          },
           "post" : {
             "tags" : [
               "product-controller"
@@ -1005,8 +1008,6 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
       }
     }
   )
-
-  name = "api_gateway_fiap_postech"
 
   endpoint_configuration {
     types = ["REGIONAL"]

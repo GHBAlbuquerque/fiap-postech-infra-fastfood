@@ -1,5 +1,5 @@
 // GET - PRODUCTS
-/*resource "aws_api_gateway_resource" "endpoint_get_products" {
+/resource "aws_api_gateway_resource" "endpoint_get_products" {
   rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
   parent_id   = aws_api_gateway_rest_api.api_gateway_fiap_postech.root_resource_id
   path_part   = "products"
@@ -10,9 +10,8 @@ resource "aws_api_gateway_method" "endpoint_get_products_method" {
   rest_api_id   = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
   resource_id   = aws_api_gateway_resource.endpoint_get_products.id
   http_method   = "GET"
-  authorization = "NONE"
- # authorization = "CUSTOM"
- # authorizer_id = aws_api_gateway_authorizer.lambda_authorizer_cpf.id
+  authorization = "CUSTOM"
+  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer_cpf.id
 
   request_parameters = {
     "method.request.querystring.category" = true
@@ -73,4 +72,4 @@ resource "aws_api_gateway_method_response" "response_200" {
   resource_id = aws_api_gateway_resource.endpoint_get_products.id
   http_method = aws_api_gateway_method.endpoint_get_products_method.http_method
   status_code = "500"
-}*/
+}
