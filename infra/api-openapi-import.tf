@@ -4,8 +4,7 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
       "openapi" : "3.0.1",
       "info" : {
         "title" : "Fast Food FIAP",
-        "description" :
-        "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP",
+        "description" : "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP",
         "version" : "v1"
       },
       "servers" : [
