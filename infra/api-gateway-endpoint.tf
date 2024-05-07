@@ -53,21 +53,21 @@ resource "aws_api_gateway_method_response" "response_200" {
   status_code = "200"
 }
 
-resource "aws_api_gateway_method_response" "response_200" {
+resource "aws_api_gateway_method_response" "response_404" {
   rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
   resource_id = aws_api_gateway_resource.endpoint_get_products.id
   http_method = aws_api_gateway_method.endpoint_get_products_method.http_method
   status_code = "404"
 }
 
-resource "aws_api_gateway_method_response" "response_200" {
+resource "aws_api_gateway_method_response" "response_400" {
   rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
   resource_id = aws_api_gateway_resource.endpoint_get_products.id
   http_method = aws_api_gateway_method.endpoint_get_products_method.http_method
   status_code = "400"
 }
 
-resource "aws_api_gateway_method_response" "response_200" {
+resource "aws_api_gateway_method_response" "response_500" {
   rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
   resource_id = aws_api_gateway_resource.endpoint_get_products.id
   http_method = aws_api_gateway_method.endpoint_get_products_method.http_method
