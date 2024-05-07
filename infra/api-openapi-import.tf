@@ -9,7 +9,7 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
       },
       "servers" : [
         {
-          "url" : "http://localhost:8080",
+          "url" : "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/",
           "description" : "Generated server url"
         }
       ],
@@ -81,6 +81,12 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
                   }
                 }
               }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "GET"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products/{id}"
             }
           },
           "delete" : {
@@ -200,6 +206,12 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
                   }
                 }
               }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "GET"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
             }
           },
           "post" : {
@@ -258,6 +270,12 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
                   }
                 }
               }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "POST"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
             }
           }
         },
@@ -311,6 +329,12 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
                   }
                 }
               }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "GET"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/orders"
             }
           },
           "post" : {
@@ -362,6 +386,12 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
               "200" : {
                 "description" : "Success"
               }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "POST"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/orders"
             }
           }
         },
@@ -422,6 +452,12 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
                   }
                 }
               }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "GET"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/clients"
             }
           },
           "post" : {
@@ -480,6 +516,12 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
                   }
                 }
               }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "POST"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/clients"
             }
           }
         },
@@ -533,6 +575,12 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
                   }
                 }
               }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "GET"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/checkout"
             }
           },
           "post" : {
@@ -584,6 +632,12 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
               "200" : {
                 "description" : "Success"
               }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "POST"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/checkout"
             }
           }
         },
@@ -644,6 +698,12 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
                   }
                 }
               }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "GET"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/order/{orderId}/payment-status"
             }
           }
         }
