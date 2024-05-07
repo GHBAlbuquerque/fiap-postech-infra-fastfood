@@ -83,7 +83,7 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
               }
             },
             x-amazon-apigateway-integration = {
-              httpMethod           = "GET"
+              httpMethod           = "PUT"
               payloadFormatVersion = "1.0"
               type                 = "HTTP_PROXY"
               uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products/{id}"
@@ -138,6 +138,12 @@ resource "aws_api_gateway_rest_api" "postech_openapi" {
               "200" : {
                 "description" : "Success"
               }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "DELETE"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products/{id}"
             }
           }
         },
