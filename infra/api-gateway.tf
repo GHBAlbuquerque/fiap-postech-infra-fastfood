@@ -150,7 +150,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             }
           }
         },
-        "/products" : {
+#        "/products" : {
 #          "get" : {
 #            "tags" : [
 #              "product-controller"
@@ -223,71 +223,71 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
 #              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
 #            }
 #          },
-          "post" : {
-            "tags" : [
-              "product-controller"
-            ],
-            "operationId" : "createProduct",
-            "requestBody" : {
-              "content" : {
-                "application/json" : {
-                  "schema" : {
-                    "$ref" : "#/components/schemas/CreateProductRequest"
-                  }
-                }
-              },
-              "required" : true
-            },
-            "responses" : {
-              "400" : {
-                "description" : "Bad Request",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
-                  }
-                }
-              },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
-                  }
-                }
-              },
-              "404" : {
-                "description" : "Not Found",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
-                  }
-                }
-              },
-              "200" : {
-                "description" : "Success",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/BaseProductResponse"
-                    }
-                  }
-                }
-              }
-            },
-            x-amazon-apigateway-integration = {
-              httpMethod           = "POST"
-              payloadFormatVersion = "1.0"
-              type                 = "HTTP_PROXY"
-              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
-            }
-          }
-        },
+#          "post" : {
+#            "tags" : [
+#              "product-controller"
+#            ],
+#            "operationId" : "createProduct",
+#            "requestBody" : {
+#              "content" : {
+#                "application/json" : {
+#                  "schema" : {
+#                    "$ref" : "#/components/schemas/CreateProductRequest"
+#                  }
+#                }
+#              },
+#              "required" : true
+#            },
+#            "responses" : {
+#              "400" : {
+#                "description" : "Bad Request",
+#                "content" : {
+#                  "application/json" : {
+#                    "schema" : {
+#                      "$ref" : "#/components/schemas/ExceptionDetails"
+#                    }
+#                  }
+#                }
+#              },
+#              "500" : {
+#                "description" : "Internal Server Error",
+#                "content" : {
+#                  "application/json" : {
+#                    "schema" : {
+#                      "$ref" : "#/components/schemas/ExceptionDetails"
+#                    }
+#                  }
+#                }
+#              },
+#              "404" : {
+#                "description" : "Not Found",
+#                "content" : {
+#                  "application/json" : {
+#                    "schema" : {
+#                      "$ref" : "#/components/schemas/ExceptionDetails"
+#                    }
+#                  }
+#                }
+#              },
+#              "200" : {
+#                "description" : "Success",
+#                "content" : {
+#                  "application/json" : {
+#                    "schema" : {
+#                      "$ref" : "#/components/schemas/BaseProductResponse"
+#                    }
+#                  }
+#                }
+#              }
+#            },
+#            x-amazon-apigateway-integration = {
+#              httpMethod           = "POST"
+#              payloadFormatVersion = "1.0"
+#              type                 = "HTTP_PROXY"
+#              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
+#            }
+#          }
+#        },
         "/orders" : {
           "get" : {
             "tags" : [
