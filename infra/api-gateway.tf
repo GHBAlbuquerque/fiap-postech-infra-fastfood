@@ -2,7 +2,7 @@ locals {
   load_balancer_dns = aws_alb.alb-cluster-fiap.dns_name
 }
 
-data "template_file" "api_template" {
+data "template_file" "api_template" { # uso de template_file nao funcionou -> invalid OpenAPI Specification
   template = file("../config/api_definition.json.tpl")
   vars     = {
     load_balancer_dns = "http://${local.load_balancer_dns}"
@@ -17,7 +17,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
-  # body = jsonencode(data.template_file.api_template) # esta config usando template_file nao funcionou
+  # body = jsonencode(data.template_file.api_template) # esta config usando template_file nao funcionou.
   body = jsonencode(
     {
       "openapi" : "3.0.1",
