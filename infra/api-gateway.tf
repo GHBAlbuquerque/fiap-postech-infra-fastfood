@@ -13,7 +13,7 @@ data "template_file" "api_template" {
 }
 
 resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
-  depends_on  = [aws_alb.alb-cluster-fiap, aws_api_gateway_authorizer.lambda_authorizer_cpf]
+  depends_on  = [aws_alb.alb-cluster-fiap]
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
@@ -1022,21 +1022,21 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             }
           }
         },
-#        "securitySchemes" : {
-#          "lambda_authorizer_cpf" : {
-#            "type" : "apiKey",
-#            "name" : "auth",
-#            "in" : "header",
-#            "x-amazon-apigateway-authtype" : "custom",
-#            "x-amazon-apigateway-authorizer" : {
-#              "type" : "request",
-#              "identitySource" : "method.request.header.cpf_cliente",
-#              "authorizerCredentials" : "arn:aws:iam::${var.accountid}:role/LabRole",
-#              "authorizerUri" : "arn:aws:apigateway:${var.region}:lambda:path/2024-04-22/functions/${var.lambda_arn}/invocations",
-#              "authorizerResultTtlInSeconds" : 300
-#            }
-#          }
-#        }
+        "securitySchemes" : {
+          "lambda_authorizer_cpf" : {
+            "type" : "apiKey",
+            "name" : "auth",
+            "in" : "header",
+            "x-amazon-apigateway-authtype" : "custom",
+            "x-amazon-apigateway-authorizer" : {
+              "type" : "request",
+              "identitySource" : "method.request.header.cpf_cliente",
+              "authorizerCredentials" : "arn:aws:iam::${var.accountid}:role/LabRole",
+              "authorizerUri" : "arn:aws:apigateway:${var.region}:lambda:path/2024-04-22/functions/${var.lambda_arn}/invocations",
+              "authorizerResultTtlInSeconds" : 300
+            }
+          }
+        }
       }
     }
   )

@@ -5,7 +5,7 @@ resource "aws_api_gateway_authorizer" "lambda_authorizer_cpf" {
   authorizer_credentials = var.lab_role_arn
   type                   = "REQUEST"
   identity_source        = "method.request.header.cpf_cliente"
-} # foi criada direto no json open api em securitySchemes e associada. Fe
+} # foi criada direto no json open api em securitySchemes e associada. não funcionou subindo via terraform direto (auth: NONE)
 
 
 resource "aws_lambda_permission" "lambda_permission" {
