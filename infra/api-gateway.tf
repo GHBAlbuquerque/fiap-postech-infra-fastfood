@@ -17,6 +17,13 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
+  cors_configuration {
+    allow_origins = ["https://www.mywebsite.fr"]
+    allow_methods = ["POST", "GET", "OPTIONS"]
+    allow_headers = ["content-type"]
+    max_age = 300
+  }
+
   # body = jsonencode(data.template_file.api_template) # FIXME: esta config usando template_file nao funcionou.
   body = jsonencode(
     {
@@ -33,6 +40,87 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
         }
       ],
       "paths" : {
+        "/": {
+          "get": {
+            "operationId": "GetPet",
+            "responses": {
+              "200": {
+                "description": "200 response",
+                "headers": {
+                  "Access-Control-Allow-Origin": {
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "content": {}
+              }
+            },
+            "x-amazon-apigateway-integration": {
+              "httpMethod": "GET",
+              "uri": "http://petstore.execute-api.us-east-1.amazonaws.com/petstore/pets",
+              "responses": {
+                "default": {
+                  "statusCode": "200",
+                  "responseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": "'*'"
+                  }
+                }
+              },
+              "passthroughBehavior": "when_no_match",
+              "type": "http"
+            }
+          },
+          "options": {
+            "responses": {
+              "200": {
+                "description": "200 response",
+                "headers": {
+                  "Access-Control-Allow-Origin": {
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  "Access-Control-Allow-Methods": {
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  "Access-Control-Allow-Headers": {
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Empty"
+                    }
+                  }
+                }
+              }
+            },
+            "x-amazon-apigateway-integration": {
+              "responses": {
+                "default": {
+                  "statusCode": "200",
+                  "responseParameters": {
+                    "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'",
+                    "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'",
+                    "method.response.header.Access-Control-Allow-Origin": "'*'"
+                  }
+                }
+              },
+              "requestTemplates": {
+                "application/json": "{\"statusCode\": 200}"
+              },
+              "passthroughBehavior": "when_no_match",
+              "type": "mock"
+            }
+          }
+        }
+      },
         "/products/{id}" : {
           "put" : {
             "tags" : [

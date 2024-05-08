@@ -12,6 +12,87 @@
     }
   ],
   "paths" : {
+      "/": {
+        "get": {
+          "operationId": "GetPet",
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "headers": {
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              },
+              "content": {}
+            }
+          },
+          "x-amazon-apigateway-integration": {
+            "httpMethod": "GET",
+            "uri": "http://petstore.execute-api.us-east-1.amazonaws.com/petstore/pets",
+            "responses": {
+              "default": {
+                "statusCode": "200",
+                "responseParameters": {
+                  "method.response.header.Access-Control-Allow-Origin": "'*'"
+                }
+              }
+            },
+            "passthroughBehavior": "when_no_match",
+            "type": "http"
+          }
+        },
+        "options": {
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "headers": {
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "Access-Control-Allow-Methods": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "Access-Control-Allow-Headers": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Empty"
+                  }
+                }
+              }
+            }
+          },
+          "x-amazon-apigateway-integration": {
+            "responses": {
+              "default": {
+                "statusCode": "200",
+                "responseParameters": {
+                  "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'",
+                  "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'",
+                  "method.response.header.Access-Control-Allow-Origin": "'*'"
+                }
+              }
+            },
+            "requestTemplates": {
+              "application/json": "{\"statusCode\": 200}"
+            },
+            "passthroughBehavior": "when_no_match",
+            "type": "mock"
+          }
+        }
+      }
+     },
     "/products/{id}" : {
       "put" : {
         "tags" : [
