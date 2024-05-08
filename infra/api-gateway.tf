@@ -3,12 +3,17 @@ locals {
 }
 
 resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
-  depends_on = [aws_alb.alb-cluster-fiap]
+  depends_on  = [aws_alb.alb-cluster-fiap]
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
-  body = jsonencode(templatefile("../config/api_definition.json"),
-    {load_balancer_dns = local.load_balancer_dns, accountid = var.accountid, region = var.region, lambda_arn = var.lambda_arn}
+  body = jsonencode(templatefile("../config/api_definition.json",
+    {
+      load_balancer_dns = local.load_balancer_dns,
+      accountid         = var.accountid,
+      region            = var.region,
+      lambda_arn        = var.lambda_arn
+    })
   )
   /*body = jsonencode(
     {
