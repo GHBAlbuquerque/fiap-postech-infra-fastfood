@@ -17,8 +17,8 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
-  body = jsonencode(data.template_file.api_template) # esta config usando template_file nao funcionou
-  /*body = jsonencode(
+  # body = jsonencode(data.template_file.api_template) # esta config usando template_file nao funcionou
+  body = jsonencode(
     {
       "openapi" : "3.0.1",
       "info" : {
@@ -1026,7 +1026,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             }
           }
         },
-        "securitySchemes" : {
+        /*"securitySchemes" : {
           "lambda_authorizer_cpf" : {
             "type" : "apiKey",
             "name" : "auth",
@@ -1040,10 +1040,10 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "authorizerResultTtlInSeconds" : 300
             }
           }
-        }
+        }*/
       }
     }
-  )*/
+  )
 
   endpoint_configuration {
     types = ["REGIONAL"]
