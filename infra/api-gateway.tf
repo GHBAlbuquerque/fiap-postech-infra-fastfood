@@ -1,13 +1,9 @@
-locals {
-  load_balancer_dns = aws_alb.alb-cluster-fiap.dns_name
-}
-
 data "template_file" "api_template" {
-  template = file("../config/api_definition.json")
-  vars = {
-    load_balancer_dns = local.load_balancer_dns,
-    accountid         = var.accountid,
-    region            = var.region,
+  template = file("../config/api_definition.json.tpl")
+  vars     = {
+    load_balancer_dns = aws_alb.alb-cluster-fiap.dns_name
+    accountid         = var.accountid
+    region            = var.region
     lambda_arn        = var.lambda_arn
   }
 }
@@ -17,15 +13,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
-  body = jsonencode(data.template_file.api_template)
-#  body = jsonencode(templatefile("../config/api_definition.json.tftpl",
-#    {
-#      load_balancer_dns = local.load_balancer_dns,
-#      accountid         = var.accountid,
-#      region            = var.region,
-#      lambda_arn        = var.lambda_arn
-#    })
-#  )
+  body = jsonencode(data.template_file.api_template) # nao funcionou
   /*body = jsonencode(
     {
       "openapi" : "3.0.1",
