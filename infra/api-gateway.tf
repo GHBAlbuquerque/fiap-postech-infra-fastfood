@@ -1058,10 +1058,21 @@ resource "aws_api_gateway_deployment" "postech_deployment" {
   }
 }
 
-resource "aws_api_gateway_stage" "postech_stage_test" {
+resource "aws_api_gateway_stage" "postech_stage" {
   deployment_id = aws_api_gateway_deployment.postech_deployment.id
   rest_api_id   = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
-  stage_name    = "postech_stage_test"
+  stage_name    = "postech_stage"
+}
+
+resource "aws_api_gateway_method_settings" "postech_gtw_logs" {
+  rest_api_id = "${aws_api_gateway_rest_api.api_gateway_fiap_postech.id}"
+  stage_name  = "${aws_api_gateway_stage.postech_stage.stage_name}"
+  method_path = "*/*"
+  settings {
+    logging_level = "INFO"
+    data_trace_enabled = true
+    metrics_enabled = true
+  }
 }
 
 
