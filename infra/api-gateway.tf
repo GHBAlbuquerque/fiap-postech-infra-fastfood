@@ -17,7 +17,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
-  body = jsonencode(api_template)
+  body = jsonencode(data.template_file.api_template)
 #  body = jsonencode(templatefile("../config/api_definition.json.tftpl",
 #    {
 #      load_balancer_dns = local.load_balancer_dns,
