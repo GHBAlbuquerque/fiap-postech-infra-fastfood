@@ -5,7 +5,7 @@ locals {
 data "template_file" "api_template" {
   template = file("../config/api_definition.json.tpl")
   vars     = {
-    load_balancer_dns = "http://${aws_alb.alb-cluster-fiap.dns_name}"
+    load_balancer_dns = "http://${local.load_balancer_dns}"
     accountid         = var.accountid
     region            = var.region
     lambda_arn        = var.lambda_arn
@@ -17,8 +17,8 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
-  #body = jsonencode(data.template_file.api_template) # esta config usando template_file nao funcionou
-  body = jsonencode(
+  body = jsonencode(data.template_file.api_template) # esta config usando template_file nao funcionou
+  /*body = jsonencode(
     {
       "openapi" : "3.0.1",
       "info" : {
@@ -1043,7 +1043,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
         }
       }
     }
-  )
+  )*/
 
   endpoint_configuration {
     types = ["REGIONAL"]
