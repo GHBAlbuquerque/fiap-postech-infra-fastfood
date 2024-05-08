@@ -7,7 +7,7 @@
   },
   "servers" : [
     {
-      "url" : "${local.load_balancer_dns}",
+      "url" : "$${jsonencode(load_balancer_dns)}",
       "description" : "Generated server url"
     }
   ],
@@ -84,7 +84,7 @@
           "httpMethod" : "PUT",
           "payloadFormatVersion" : "1.0",
           "type" : "HTTP_PROXY",
-          "uri" : "${local.load_balancer_dns}/products/{id}"
+          "uri" : "${jsonencode(load_balancer_dns)}/products/{id}"
         }
       },
       "delete" : {
@@ -141,7 +141,7 @@
           "httpMethod" : "DELETE",
           "payloadFormatVersion" : "1.0",
           "type" : "HTTP_PROXY",
-          "uri" : "${local.load_balancer_dns}/products/{id}"
+          "uri" : "${jsonencode(load_balancer_dns)}/products/{id}"
         }
       }
     },
@@ -220,7 +220,7 @@
           "httpMethod" : "GET",
           "payloadFormatVersion" : "1.0",
           "type" : "HTTP_PROXY",
-          "uri" : "${local.load_balancer_dns}/products"
+          "uri" : "${jsonencode(load_balancer_dns)}/products"
         }
       },
       "post" : {
@@ -284,7 +284,7 @@
           "httpMethod" : "POST",
           "payloadFormatVersion" : "1.0",
           "type" : "HTTP_PROXY",
-          "uri" : "${local.load_balancer_dns}/products"
+          "uri" : "${jsonencode(load_balancer_dns)}/products"
         }
       }
     },
@@ -343,7 +343,7 @@
           "httpMethod" : "GET",
           "payloadFormatVersion" : "1.0",
           "type" : "HTTP_PROXY",
-          "uri" : "${local.load_balancer_dns}orders"
+          "uri" : "${jsonencode(load_balancer_dns)}orders"
         }
       },
       "post" : {
@@ -400,7 +400,7 @@
           "httpMethod" : "POST",
           "payloadFormatVersion" : "1.0",
           "type" : "HTTP_PROXY",
-          "uri" : "${local.load_balancer_dns}/orders"
+          "uri" : "${jsonencode(load_balancer_dns)}/orders"
         }
       }
     },
@@ -466,7 +466,7 @@
           "httpMethod" : "GET",
           "payloadFormatVersion" : "1.0",
           "type" : "HTTP_PROXY",
-          "uri" : "${local.load_balancer_dns}/clients"
+          "uri" : "${jsonencode(load_balancer_dns)}/clients"
         }
       },
       "post" : {
@@ -530,7 +530,7 @@
           "httpMethod" : "POST",
           "payloadFormatVersion" : "1.0",
           "type" : "HTTP_PROXY",
-          "uri" : "${local.load_balancer_dns}/clients"
+          "uri" : "${jsonencode(load_balancer_dns)}/clients"
         }
       }
     },
@@ -589,7 +589,7 @@
           "httpMethod" : "GET",
           "payloadFormatVersion" : "1.0",
           "type" : "HTTP_PROXY",
-          "uri" : "${local.load_balancer_dns}/checkout"
+          "uri" : "${jsonencode(load_balancer_dns)}/checkout"
         }
       },
       "post" : {
@@ -646,7 +646,7 @@
           "httpMethod" : "POST",
           "payloadFormatVersion" : "1.0",
           "type" : "HTTP_PROXY",
-          "uri" : "${local.load_balancer_dns}/checkout"
+          "uri" : "${jsonencode(load_balancer_dns)}/checkout"
         }
       }
     },
@@ -712,7 +712,7 @@
           "httpMethod" : "GET",
           "payloadFormatVersion" : "1.0",
           "type" : "HTTP_PROXY",
-          "uri" : "${local.load_balancer_dns}/payment-status"
+          "uri" : "${jsonencode(load_balancer_dns)}/payment-status"
         }
       }
     }
@@ -1014,8 +1014,8 @@
         "x-amazon-apigateway-authorizer" : {
           "type" : "request",
           "identitySource" : "method.request.header.cpf_cliente",
-          "authorizerCredentials" : "arn:aws:iam::${var.accountid}:role/LabRole",
-          "authorizerUri" : "arn:aws:apigateway:${var.region}:lambda:path/2024-04-22/functions/${var.lambda_arn}/invocations",
+          "authorizerCredentials" : "arn:aws:iam::${jsonencode(accountid)}:role/LabRole",
+          "authorizerUri" : "arn:aws:apigateway:${jsonencode(region)}:lambda:path/2024-04-22/functions/${jsonencode(lambda_arn)}/invocations",
           "authorizerResultTtlInSeconds" : 300
         }
       }
