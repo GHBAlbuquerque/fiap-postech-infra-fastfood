@@ -5,7 +5,7 @@ locals {
 data "template_file" "api_template" {
   template = file("../config/api_definition.json.tpl")
   vars     = {
-    load_balancer_dns = aws_alb.alb-cluster-fiap.dns_name
+    load_balancer_dns = "http://${aws_alb.alb-cluster-fiap.dns_name}"
     accountid         = var.accountid
     region            = var.region
     lambda_arn        = var.lambda_arn
@@ -28,7 +28,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
       },
       "servers" : [
         {
-          "url" : aws_alb.alb-cluster-fiap.dns_name,
+          "url" : "http://${local.load_balancer_dns}",
           "description" : "Generated server url"
         }
       ],
@@ -105,7 +105,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "PUT",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "${local.load_balancer_dns}/products/{id}"
+              "uri" : "http://${local.load_balancer_dns}/products/{id}"
             }
           },
           "delete" : {
@@ -162,7 +162,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "DELETE",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "${local.load_balancer_dns}/products/{id}"
+              "uri" : "http://${local.load_balancer_dns}/products/{id}"
             }
           }
         },
@@ -241,7 +241,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "${local.load_balancer_dns}/products"
+              "uri" : "http://${local.load_balancer_dns}/products"
             }
           },
           "post" : {
@@ -305,7 +305,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "${local.load_balancer_dns}/products"
+              "uri" : "http://${local.load_balancer_dns}/products"
             }
           }
         },
@@ -364,7 +364,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "${local.load_balancer_dns}/orders"
+              "uri" : "http://${local.load_balancer_dns}/orders"
             }
           },
           "post" : {
@@ -421,7 +421,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "${local.load_balancer_dns}/orders"
+              "uri" : "http://${local.load_balancer_dns}/orders"
             }
           }
         },
@@ -487,7 +487,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "${local.load_balancer_dns}/clients"
+              "uri" : "http://${local.load_balancer_dns}/clients"
             }
           },
           "post" : {
@@ -551,7 +551,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "${local.load_balancer_dns}/clients"
+              "uri" : "http://${local.load_balancer_dns}/clients"
             }
           }
         },
@@ -610,7 +610,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "${local.load_balancer_dns}/checkout"
+              "uri" : "http://${local.load_balancer_dns}/checkout"
             }
           },
           "post" : {
@@ -667,7 +667,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "${local.load_balancer_dns}/checkout"
+              "uri" : "http://${local.load_balancer_dns}/checkout"
             }
           }
         },
@@ -733,7 +733,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "${local.load_balancer_dns}/payment-status"
+              "uri" : "http://${local.load_balancer_dns}/payment-status"
             }
           }
         }
