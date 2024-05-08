@@ -1022,7 +1022,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             }
           }
         },
-        /*"securitySchemes" : {
+        "securitySchemes" : {
           "lambda_authorizer_cpf" : {
             "type" : "apiKey",
             "name" : "auth",
@@ -1036,7 +1036,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "authorizerResultTtlInSeconds" : 300
             }
           }
-        }*/
+        }
       }
     }
   )
