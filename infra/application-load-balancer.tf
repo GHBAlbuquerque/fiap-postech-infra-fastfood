@@ -20,7 +20,7 @@ resource "aws_lb_target_group" "target-group-cluster-fiap" {
     path    = "/actuator/health"
     port    = 30007
     matcher = "200"
-    interval = 60
+    interval = 90
     timeout = 60
   }
 }
