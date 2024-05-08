@@ -7,7 +7,7 @@
   },
   "servers" : [
     {
-      "url" : "$${jsonencode(load_balancer_dns)}",
+      "url" : "${jsonencode(load_balancer_dns)}",
       "description" : "Generated server url"
     }
   ],
@@ -343,7 +343,7 @@
           "httpMethod" : "GET",
           "payloadFormatVersion" : "1.0",
           "type" : "HTTP_PROXY",
-          "uri" : "${jsonencode(load_balancer_dns)}orders"
+          "uri" : "${jsonencode(load_balancer_dns)}/orders"
         }
       },
       "post" : {
