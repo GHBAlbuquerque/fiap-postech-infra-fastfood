@@ -3,6 +3,7 @@ locals {
 }
 
 resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
+  depends_on = [aws_alb.alb-cluster-fiap]
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
