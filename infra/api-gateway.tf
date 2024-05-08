@@ -7,8 +7,8 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
-  #body = jsonencode(file("../config/api_definition.json"))
-  body = jsonencode(
+  body = jsonencode(file("../config/api_definition.json"))
+  /*body = jsonencode(
     {
       "openapi" : "3.0.1",
       "info" : {
@@ -1033,7 +1033,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
         }
       }
     }
-  )
+  )*/
 
   endpoint_configuration {
     types = ["REGIONAL"]
