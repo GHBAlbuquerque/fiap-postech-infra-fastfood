@@ -18,13 +18,6 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
-  cors_configuration {
-    allow_origins = ["https://www.mywebsite.fr"]
-    allow_methods = ["POST", "GET", "OPTIONS"]
-    allow_headers = ["content-type"]
-    max_age       = 300
-  }
-
   # body = jsonencode(data.template_file.api_template) # FIXME: esta config usando template_file nao funcionou.
   body = jsonencode(
     {
