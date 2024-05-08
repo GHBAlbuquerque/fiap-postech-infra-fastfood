@@ -91,8 +91,7 @@
             "type": "mock"
           }
         }
-      }
-     },
+      },
     "/products/{id}" : {
       "put" : {
         "tags" : [
