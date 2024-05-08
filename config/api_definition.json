@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/",
+      "url": "${local.load_balancer_dns}",
       "description": "Generated server url"
     }
   ],
@@ -99,7 +99,7 @@
           "httpMethod": "PUT",
           "payloadFormatVersion": "1.0",
           "type": "HTTP_PROXY",
-          "uri": "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products/{id}"
+          "uri": "${local.load_balancer_dns}/products/{id}"
         }
       },
       "delete": {
@@ -156,7 +156,7 @@
           "httpMethod": "DELETE",
           "payloadFormatVersion": "1.0",
           "type": "HTTP_PROXY",
-          "uri": "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products/{id}"
+          "uri": "${local.load_balancer_dns}/products/{id}"
         }
       }
     },
@@ -235,7 +235,7 @@
           "httpMethod": "GET",
           "payloadFormatVersion": "1.0",
           "type": "HTTP_PROXY",
-          "uri": "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
+          "uri": "${local.load_balancer_dns}/products"
         }
       },
       "post": {
@@ -299,7 +299,7 @@
           "httpMethod": "POST",
           "payloadFormatVersion": "1.0",
           "type": "HTTP_PROXY",
-          "uri": "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
+          "uri": "${local.load_balancer_dns}/products"
         }
       }
     },
@@ -358,7 +358,7 @@
           "httpMethod": "GET",
           "payloadFormatVersion": "1.0",
           "type": "HTTP_PROXY",
-          "uri": "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/orders"
+          "uri": "${local.load_balancer_dns}/orders"
         }
       },
       "post": {
@@ -415,7 +415,7 @@
           "httpMethod": "POST",
           "payloadFormatVersion": "1.0",
           "type": "HTTP_PROXY",
-          "uri": "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/orders"
+          "uri": "${local.load_balancer_dns}/orders"
         }
       }
     },
@@ -481,7 +481,7 @@
           "httpMethod": "GET",
           "payloadFormatVersion": "1.0",
           "type": "HTTP_PROXY",
-          "uri": "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/clients"
+          "uri": "${local.load_balancer_dns}/clients"
         }
       },
       "post": {
@@ -545,7 +545,7 @@
           "httpMethod": "POST",
           "payloadFormatVersion": "1.0",
           "type": "HTTP_PROXY",
-          "uri": "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/clients"
+          "uri": "${local.load_balancer_dns}/clients"
         }
       }
     },
@@ -604,7 +604,7 @@
           "httpMethod": "GET",
           "payloadFormatVersion": "1.0",
           "type": "HTTP_PROXY",
-          "uri": "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/checkout"
+          "uri": "${local.load_balancer_dns}/checkout"
         }
       },
       "post": {
@@ -661,7 +661,7 @@
           "httpMethod": "POST",
           "payloadFormatVersion": "1.0",
           "type": "HTTP_PROXY",
-          "uri": "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/checkout"
+          "uri": "${local.load_balancer_dns}/checkout"
         }
       }
     },
@@ -727,7 +727,7 @@
           "httpMethod": "GET",
           "payloadFormatVersion": "1.0",
           "type": "HTTP_PROXY",
-          "uri": "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/payment-status"
+          "uri": "${local.load_balancer_dns}/payment-status"
         }
       }
     }

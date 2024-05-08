@@ -1,3 +1,7 @@
+locals {
+  load_balancer_dns = aws_alb.alb-cluster-fiap.dns_name
+}
+
 resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
