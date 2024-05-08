@@ -60,7 +60,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "required" : true
             },
             "responses" : {
-              "400" : {
+                          "400" : {
                 "description" : "Bad Request",
                 "content" : {
                   "application/json" : {
@@ -70,17 +70,17 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
+            "403" : {
+              "description" : "Forbidden",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
                   }
                 }
-              },
-              "404" : {
+              }
+            },
+            "404" : {
                 "description" : "Not Found",
                 "content" : {
                   "application/json" : {
@@ -90,6 +90,16 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
+            "500" : {
+              "description" : "Internal Server Error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
+                  }
+                }
+              }
+            },
               "200" : {
                 "description" : "Success",
                 "content" : {
@@ -124,7 +134,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               }
             ],
             "responses" : {
-              "400" : {
+                          "400" : {
                 "description" : "Bad Request",
                 "content" : {
                   "application/json" : {
@@ -134,17 +144,17 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
+            "403" : {
+              "description" : "Forbidden",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
                   }
                 }
-              },
-              "404" : {
+              }
+            },
+            "404" : {
                 "description" : "Not Found",
                 "content" : {
                   "application/json" : {
@@ -154,6 +164,16 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
+            "500" : {
+              "description" : "Internal Server Error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
+                  }
+                }
+              }
+            },
               "200" : {
                 "description" : "Success"
               }
@@ -188,7 +208,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               }
             ],
             "responses" : {
-              "400" : {
+                          "400" : {
                 "description" : "Bad Request",
                 "content" : {
                   "application/json" : {
@@ -198,17 +218,17 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
+            "403" : {
+              "description" : "Forbidden",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
                   }
                 }
-              },
-              "404" : {
+              }
+            },
+            "404" : {
                 "description" : "Not Found",
                 "content" : {
                   "application/json" : {
@@ -218,6 +238,16 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
+            "500" : {
+              "description" : "Internal Server Error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
+                  }
+                }
+              }
+            },
               "200" : {
                 "description" : "Success",
                 "content" : {
@@ -256,7 +286,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "required" : true
             },
             "responses" : {
-              "400" : {
+                          "400" : {
                 "description" : "Bad Request",
                 "content" : {
                   "application/json" : {
@@ -266,17 +296,17 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
+            "403" : {
+              "description" : "Forbidden",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
                   }
                 }
-              },
-              "404" : {
+              }
+            },
+            "404" : {
                 "description" : "Not Found",
                 "content" : {
                   "application/json" : {
@@ -286,6 +316,16 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
+            "500" : {
+              "description" : "Internal Server Error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
+                  }
+                }
+              }
+            },
               "200" : {
                 "description" : "Success",
                 "content" : {
@@ -312,7 +352,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             ],
             "operationId" : "getOrders",
             "responses" : {
-              "400" : {
+                          "400" : {
                 "description" : "Bad Request",
                 "content" : {
                   "application/json" : {
@@ -322,17 +362,17 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
+            "403" : {
+              "description" : "Forbidden",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
                   }
                 }
-              },
-              "404" : {
+              }
+            },
+            "404" : {
                 "description" : "Not Found",
                 "content" : {
                   "application/json" : {
@@ -342,6 +382,16 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
+            "500" : {
+              "description" : "Internal Server Error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
+                  }
+                }
+              }
+            },
               "200" : {
                 "description" : "Success",
                 "content" : {
@@ -379,7 +429,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "required" : true
             },
             "responses" : {
-              "400" : {
+                          "400" : {
                 "description" : "Bad Request",
                 "content" : {
                   "application/json" : {
@@ -389,17 +439,17 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
+            "403" : {
+              "description" : "Forbidden",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
                   }
                 }
-              },
-              "404" : {
+              }
+            },
+            "404" : {
                 "description" : "Not Found",
                 "content" : {
                   "application/json" : {
@@ -409,6 +459,16 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
+            "500" : {
+              "description" : "Internal Server Error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
+                  }
+                }
+              }
+            },
               "200" : {
                 "description" : "Success"
               }
@@ -438,7 +498,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               }
             ],
             "responses" : {
-              "400" : {
+                          "400" : {
                 "description" : "Bad Request",
                 "content" : {
                   "application/json" : {
@@ -448,17 +508,17 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
+            "403" : {
+              "description" : "Forbidden",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
                   }
                 }
-              },
-              "404" : {
+              }
+            },
+            "404" : {
                 "description" : "Not Found",
                 "content" : {
                   "application/json" : {
@@ -468,6 +528,16 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
+            "500" : {
+              "description" : "Internal Server Error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
+                  }
+                }
+              }
+            },
               "200" : {
                 "description" : "Success",
                 "content" : {
@@ -502,7 +572,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "required" : true
             },
             "responses" : {
-              "400" : {
+                          "400" : {
                 "description" : "Bad Request",
                 "content" : {
                   "application/json" : {
@@ -512,17 +582,17 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
+            "403" : {
+              "description" : "Forbidden",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
                   }
                 }
-              },
-              "404" : {
+              }
+            },
+            "404" : {
                 "description" : "Not Found",
                 "content" : {
                   "application/json" : {
@@ -532,6 +602,16 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
+            "500" : {
+              "description" : "Internal Server Error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
+                  }
+                }
+              }
+            },
               "200" : {
                 "description" : "Success",
                 "content" : {
@@ -558,7 +638,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             ],
             "operationId" : "findAll",
             "responses" : {
-              "400" : {
+                          "400" : {
                 "description" : "Bad Request",
                 "content" : {
                   "application/json" : {
@@ -568,17 +648,17 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
+            "403" : {
+              "description" : "Forbidden",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
                   }
                 }
-              },
-              "404" : {
+              }
+            },
+            "404" : {
                 "description" : "Not Found",
                 "content" : {
                   "application/json" : {
@@ -588,6 +668,16 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
+            "500" : {
+              "description" : "Internal Server Error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
+                  }
+                }
+              }
+            },
               "200" : {
                 "description" : "Success",
                 "content" : {
@@ -625,7 +715,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "required" : true
             },
             "responses" : {
-              "400" : {
+                          "400" : {
                 "description" : "Bad Request",
                 "content" : {
                   "application/json" : {
@@ -635,17 +725,17 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
+            "403" : {
+              "description" : "Forbidden",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
                   }
                 }
-              },
-              "404" : {
+              }
+            },
+            "404" : {
                 "description" : "Not Found",
                 "content" : {
                   "application/json" : {
@@ -655,6 +745,16 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
+            "500" : {
+              "description" : "Internal Server Error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
+                  }
+                }
+              }
+            },
               "200" : {
                 "description" : "Success"
               }
@@ -684,7 +784,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               }
             ],
             "responses" : {
-              "400" : {
+                          "400" : {
                 "description" : "Bad Request",
                 "content" : {
                   "application/json" : {
@@ -694,17 +794,17 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
+            "403" : {
+              "description" : "Forbidden",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
                   }
                 }
-              },
-              "404" : {
+              }
+            },
+            "404" : {
                 "description" : "Not Found",
                 "content" : {
                   "application/json" : {
@@ -714,6 +814,16 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                   }
                 }
               },
+            "500" : {
+              "description" : "Internal Server Error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/ExceptionDetails"
+                  }
+                }
+              }
+            },
               "200" : {
                 "description" : "Success",
                 "content" : {
