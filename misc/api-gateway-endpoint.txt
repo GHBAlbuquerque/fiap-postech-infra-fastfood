@@ -1,0 +1,75 @@
+#// GET - PRODUCTS
+#resource "aws_api_gateway_resource" "endpoint_get_products" {
+#  rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
+#  parent_id   = aws_api_gateway_rest_api.api_gateway_fiap_postech.root_resource_id
+#  path_part   = "products"
+#}
+#
+#resource "aws_api_gateway_method" "endpoint_get_products_method" {
+#  depends_on    = [aws_api_gateway_authorizer.lambda_authorizer_cpf, aws_alb.alb-cluster-fiap]
+#  rest_api_id   = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
+#  resource_id   = aws_api_gateway_resource.endpoint_get_products.id
+#  http_method   = "GET"
+#  authorization = "CUSTOM"
+#  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer_cpf.id
+#
+#  request_parameters = {
+#    "method.request.querystring.category" = true,
+#    "method.request.header.Authorization" = true
+#  }
+#}
+#
+#resource "aws_api_gateway_integration" "endpoint_get_products_integration" {
+#  rest_api_id          = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
+#  resource_id          = aws_api_gateway_resource.endpoint_get_products.id
+#  http_method          = aws_api_gateway_method.endpoint_get_products_method.http_method
+#  timeout_milliseconds = 29000
+#
+#  type                    = "HTTP_PROXY"
+#  uri                     = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
+#  integration_http_method = "GET"
+#  passthrough_behavior    = "WHEN_NO_MATCH"
+#  content_handling        = "CONVERT_TO_TEXT"
+#
+#  request_parameters = {
+#    "integration.request.header.Authorization" = "'static'",
+#    "integration.request.querystring.category" = "'static'",
+#  }
+#
+##  # Transforms the incoming XML request to JSON
+##  request_templates = {
+##    "application/xml" = <<EOF
+##{
+##   "body" : $input.json('$')
+##}
+##EOF
+##  }
+#}
+#
+#resource "aws_api_gateway_method_response" "response_200" {
+#  rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
+#  resource_id = aws_api_gateway_resource.endpoint_get_products.id
+#  http_method = aws_api_gateway_method.endpoint_get_products_method.http_method
+#  status_code = "200"
+#}
+#
+#resource "aws_api_gateway_method_response" "response_404" {
+#  rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
+#  resource_id = aws_api_gateway_resource.endpoint_get_products.id
+#  http_method = aws_api_gateway_method.endpoint_get_products_method.http_method
+#  status_code = "404"
+#}
+#
+#resource "aws_api_gateway_method_response" "response_400" {
+#  rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
+#  resource_id = aws_api_gateway_resource.endpoint_get_products.id
+#  http_method = aws_api_gateway_method.endpoint_get_products_method.http_method
+#  status_code = "400"
+#}
+#
+#resource "aws_api_gateway_method_response" "response_500" {
+#  rest_api_id = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
+#  resource_id = aws_api_gateway_resource.endpoint_get_products.id
+#  http_method = aws_api_gateway_method.endpoint_get_products_method.http_method
+#  status_code = "500"
+#}

@@ -16,278 +16,296 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
           "description" : "Generated server url"
         }
       ],
+      "securityDefinitions": {
+        "lambda_authorizer_cpf": {
+          "type": "apiKey",
+          "name": "auth",
+          "in": "header",
+          "x-amazon-apigateway-authtype": "custom",
+          "x-amazon-apigateway-authorizer": {
+            "type": "request",
+            "identitySource": "method.request.header.cpf_cliente",
+            "authorizerCredentials": "arn:aws:iam::${var.accountid}:role/LabRole",
+            "authorizerUri": "arn:aws:apigateway:${var.region}:lambda:path/2024-04-22/functions/${var.lambda_arn}/invocations",
+            "authorizerResultTtlInSeconds": 300
+          }
+        }
+      },
       "paths" : {
-#        "/products/{id}" : {
-#          "put" : {
-#            "tags" : [
-#              "product-controller"
-#            ],
-#            "operationId" : "updateProduct",
-#            "parameters" : [
-#              {
-#                "name" : "id",
-#                "in" : "path",
-#                "required" : true,
-#                "schema" : {
-#                  "type" : "string"
-#                }
-#              }
-#            ],
-#            "requestBody" : {
-#              "content" : {
-#                "application/json" : {
-#                  "schema" : {
-#                    "$ref" : "#/components/schemas/UpdateProductRequest"
-#                  }
-#                }
-#              },
-#              "required" : true
-#            },
-#            "responses" : {
-#              "400" : {
-#                "description" : "Bad Request",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/ExceptionDetails"
-#                    }
-#                  }
-#                }
-#              },
-#              "500" : {
-#                "description" : "Internal Server Error",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/ExceptionDetails"
-#                    }
-#                  }
-#                }
-#              },
-#              "404" : {
-#                "description" : "Not Found",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/ExceptionDetails"
-#                    }
-#                  }
-#                }
-#              },
-#              "200" : {
-#                "description" : "Success",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/BaseProductResponse"
-#                    }
-#                  }
-#                }
-#              }
-#            },
-#            x-amazon-apigateway-integration = {
-#              httpMethod           = "PUT"
-#              payloadFormatVersion = "1.0"
-#              type                 = "HTTP_PROXY"
-#              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products/{id}"
-#            }
-#          },
-#          "delete" : {
-#            "tags" : [
-#              "product-controller"
-#            ],
-#            "operationId" : "deleteProduct",
-#            "parameters" : [
-#              {
-#                "name" : "id",
-#                "in" : "path",
-#                "required" : true,
-#                "schema" : {
-#                  "type" : "string"
-#                }
-#              }
-#            ],
-#            "responses" : {
-#              "400" : {
-#                "description" : "Bad Request",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/ExceptionDetails"
-#                    }
-#                  }
-#                }
-#              },
-#              "500" : {
-#                "description" : "Internal Server Error",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/ExceptionDetails"
-#                    }
-#                  }
-#                }
-#              },
-#              "404" : {
-#                "description" : "Not Found",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/ExceptionDetails"
-#                    }
-#                  }
-#                }
-#              },
-#              "200" : {
-#                "description" : "Success"
-#              }
-#            },
-#            x-amazon-apigateway-integration = {
-#              httpMethod           = "DELETE"
-#              payloadFormatVersion = "1.0"
-#              type                 = "HTTP_PROXY"
-#              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products/{id}"
-#            }
-#          }
-#        },
-#        "/products" : {
-#          "get" : {
-#            "tags" : [
-#              "product-controller"
-#            ],
-#            "operationId" : "findProduct",
-#            "parameters" : [
-#              {
-#                "name" : "category",
-#                "in" : "query",
-#                "required" : true,
-#                "schema" : {
-#                  "type" : "string",
-#                  "enum" : [
-#                    "SANDWICH",
-#                    "SIDE_DISH",
-#                    "DRINK"
-#                  ]
-#                }
-#              }
-#            ],
-#            "responses" : {
-#              "400" : {
-#                "description" : "Bad Request",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/ExceptionDetails"
-#                    }
-#                  }
-#                }
-#              },
-#              "500" : {
-#                "description" : "Internal Server Error",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/ExceptionDetails"
-#                    }
-#                  }
-#                }
-#              },
-#              "404" : {
-#                "description" : "Not Found",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/ExceptionDetails"
-#                    }
-#                  }
-#                }
-#              },
-#              "200" : {
-#                "description" : "Success",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "type" : "array",
-#                      "items" : {
-#                        "$ref" : "#/components/schemas/BaseProductResponse"
-#                      }
-#                    }
-#                  }
-#                }
-#              }
-#            },
-#            x-amazon-apigateway-integration = {
-#              httpMethod           = "GET"
-#              payloadFormatVersion = "1.0"
-#              type                 = "HTTP_PROXY"
-#              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
-#            }
-#          },
-#          "post" : {
-#            "tags" : [
-#              "product-controller"
-#            ],
-#            "operationId" : "createProduct",
-#            "requestBody" : {
-#              "content" : {
-#                "application/json" : {
-#                  "schema" : {
-#                    "$ref" : "#/components/schemas/CreateProductRequest"
-#                  }
-#                }
-#              },
-#              "required" : true
-#            },
-#            "responses" : {
-#              "400" : {
-#                "description" : "Bad Request",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/ExceptionDetails"
-#                    }
-#                  }
-#                }
-#              },
-#              "500" : {
-#                "description" : "Internal Server Error",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/ExceptionDetails"
-#                    }
-#                  }
-#                }
-#              },
-#              "404" : {
-#                "description" : "Not Found",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/ExceptionDetails"
-#                    }
-#                  }
-#                }
-#              },
-#              "200" : {
-#                "description" : "Success",
-#                "content" : {
-#                  "application/json" : {
-#                    "schema" : {
-#                      "$ref" : "#/components/schemas/BaseProductResponse"
-#                    }
-#                  }
-#                }
-#              }
-#            },
-#            x-amazon-apigateway-integration = {
-#              httpMethod           = "POST"
-#              payloadFormatVersion = "1.0"
-#              type                 = "HTTP_PROXY"
-#              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
-#            }
-#          }
-#        },
+        "/products/{id}" : {
+          "put" : {
+            "tags" : [
+              "product-controller"
+            ],
+            "operationId" : "updateProduct",
+            "parameters" : [
+              {
+                "name" : "id",
+                "in" : "path",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            ],
+            "requestBody" : {
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/UpdateProductRequest"
+                  }
+                }
+              },
+              "required" : true
+            },
+            "responses" : {
+              "400" : {
+                "description" : "Bad Request",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "500" : {
+                "description" : "Internal Server Error",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "404" : {
+                "description" : "Not Found",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "200" : {
+                "description" : "Success",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/BaseProductResponse"
+                    }
+                  }
+                }
+              }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "PUT"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products/{id}"
+            }
+          },
+          "delete" : {
+            "tags" : [
+              "product-controller"
+            ],
+            "operationId" : "deleteProduct",
+            "parameters" : [
+              {
+                "name" : "id",
+                "in" : "path",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            ],
+            "responses" : {
+              "400" : {
+                "description" : "Bad Request",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "500" : {
+                "description" : "Internal Server Error",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "404" : {
+                "description" : "Not Found",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "200" : {
+                "description" : "Success"
+              }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "DELETE"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products/{id}"
+            }
+          }
+        },
+        "/products" : {
+          "get" : {
+            "tags" : [
+              "product-controller"
+            ],
+            "operationId" : "findProduct",
+            "parameters" : [
+              {
+                "name" : "category",
+                "in" : "query",
+                "required" : true,
+                "schema" : {
+                  "type" : "string",
+                  "enum" : [
+                    "SANDWICH",
+                    "SIDE_DISH",
+                    "DRINK"
+                  ]
+                }
+              }
+            ],
+            "responses" : {
+              "400" : {
+                "description" : "Bad Request",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "500" : {
+                "description" : "Internal Server Error",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "404" : {
+                "description" : "Not Found",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "200" : {
+                "description" : "Success",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "type" : "array",
+                      "items" : {
+                        "$ref" : "#/components/schemas/BaseProductResponse"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "security" : [ {
+              "lambda_authorizer_cpf" : [ ]
+            } ],
+            x-amazon-apigateway-integration = {
+              httpMethod           = "GET"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
+            }
+          },
+          "post" : {
+            "tags" : [
+              "product-controller"
+            ],
+            "operationId" : "createProduct",
+            "requestBody" : {
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/CreateProductRequest"
+                  }
+                }
+              },
+              "required" : true
+            },
+            "responses" : {
+              "400" : {
+                "description" : "Bad Request",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "500" : {
+                "description" : "Internal Server Error",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "404" : {
+                "description" : "Not Found",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "200" : {
+                "description" : "Success",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/BaseProductResponse"
+                    }
+                  }
+                }
+              }
+            },
+            x-amazon-apigateway-integration = {
+              httpMethod           = "POST"
+              payloadFormatVersion = "1.0"
+              type                 = "HTTP_PROXY"
+              uri                  = "http://alb-cluster-fiap-739898823.us-east-1.elb.amazonaws.com/products"
+            }
+          }
+        },
         "/orders" : {
           "get" : {
             "tags" : [
@@ -1030,27 +1048,6 @@ resource "aws_api_gateway_stage" "postech_stage_test" {
   deployment_id = aws_api_gateway_deployment.postech_deployment.id
   rest_api_id   = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
   stage_name    = "postech_stage_test"
-}
-
-resource "aws_api_gateway_authorizer" "lambda_authorizer_cpf" {
-  name                   = "lambda_authorizer_cpf"
-  rest_api_id            = aws_api_gateway_rest_api.api_gateway_fiap_postech.id
-  authorizer_uri         = "arn:aws:apigateway:${var.region}:lambda:path/2024-04-22/functions/${var.lambda_arn}/invocations"
-  authorizer_credentials = var.lab_role_arn
-  type                   = "REQUEST"
-  identity_source        = "method.request.header.cpf_cliente"
-}
-
-
-resource "aws_lambda_permission" "lambda_permission" {
-  statement_id  = "AllowAPIGatewayInvoke"
-  action        = "lambda:InvokeFunction"
-  function_name = var.lambda_name
-  principal     = "apigateway.amazonaws.com"
-
-  # The "/*/*" portion grants access from any method on any resource
-  # within the API Gateway REST API.
-  source_arn = "${aws_api_gateway_rest_api.api_gateway_fiap_postech.execution_arn}/*/*"
 }
 
 

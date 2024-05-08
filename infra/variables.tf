@@ -10,6 +10,10 @@ variable "profile" {
   default = "default"
 }
 
+variable "accountid" {
+  default = "067184771399"
+}
+
 variable "lambda_name" {
   default = "postech-lambda-auth-fastfood"
 }
