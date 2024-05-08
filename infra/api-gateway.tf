@@ -1033,7 +1033,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "identitySource" : "method.request.header.cpf_cliente",
               "authorizerCredentials" : "arn:aws:iam::${var.accountid}:role/LabRole",
               "authorizerUri" : "arn:aws:apigateway:${var.region}:lambda:path/2024-04-22/functions/${var.lambda_arn}/invocations",
-              "authorizerResultTtlInSeconds" : 300
+              "authorizerResultTtlInSeconds" : 0
             }
           }
         }
