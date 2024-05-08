@@ -232,11 +232,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 }
               }
             },
-            "security" : [
-              {
-                "lambda_authorizer_cpf" : []
-              }
-            ],
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
