@@ -286,6 +286,14 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                     "DRINK"
                   ]
                 }
+              },
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
               }
             ],
             "responses" : {
