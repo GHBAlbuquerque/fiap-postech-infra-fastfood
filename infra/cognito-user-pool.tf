@@ -16,9 +16,8 @@ resource "aws_cognito_user_pool_client" "client" {
   user_pool_id = aws_cognito_user_pool.user_group_postech_fiap.id
 
   generate_secret     = false
-  explicit_auth_flows = ["USER_PASSWORD_AUTH", "REFRESH_TOKEN_AUTH", "ALLOW_CUSTOM_AUTH"]
+  explicit_auth_flows = ["USER_PASSWORD_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"]
 }
-
 
 resource "aws_cognito_user" "first_user" {
   user_pool_id = aws_cognito_user_pool.user_group_postech_fiap.id
