@@ -1237,7 +1237,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-authtype" : "custom",
             "x-amazon-apigateway-authorizer" : {
               "type" : "request",
-              "identitySource" : "method.request.header.cpf_cliente",
+              "identitySource" : "method.request.header.cpf_cliente, method.request.header.senha_cliente",
               "authorizerCredentials" : "arn:aws:iam::${var.accountid}:role/LabRole",
               "authorizerUri" : "arn:aws:apigateway:${var.region}:lambda:path/2024-04-22/functions/${var.lambda_arn}/invocations",
               "authorizerResultTtlInSeconds" : 0
