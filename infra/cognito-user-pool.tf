@@ -24,7 +24,6 @@ resource "aws_cognito_user" "first_user" {
   username     = "93678719023"
 
   attributes = {
-    terraform      = true
     email          = "aneleh.annavoig@gmail.com"
     email_verified = true
     password       = "FIAPauth124_"
