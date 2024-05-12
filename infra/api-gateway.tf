@@ -161,6 +161,22 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 "schema" : {
                   "type" : "string"
                 }
+              },
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
               }
             ],
             "requestBody" : {
@@ -225,6 +241,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 }
               }
             },
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "PUT",
               "payloadFormatVersion" : "1.0",
@@ -241,6 +258,22 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               {
                 "name" : "id",
                 "in" : "path",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
                 "required" : true,
                 "schema" : {
                   "type" : "string"
@@ -292,6 +325,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 "description" : "Success"
               }
             },
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "DELETE",
               "payloadFormatVersion" : "1.0",
@@ -415,6 +449,24 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               },
               "required" : true
             },
+            "parameters" : [
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            ],
             "responses" : {
               "400" : {
                 "description" : "Bad Request",
@@ -467,6 +519,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 }
               }
             },
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
@@ -481,6 +534,24 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "order-controller"
             ],
             "operationId" : "getOrders",
+            "parameters": [
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            ],
             "responses" : {
               "400" : {
                 "description" : "Bad Request",
@@ -536,6 +607,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 }
               }
             },
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
@@ -558,6 +630,24 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               },
               "required" : true
             },
+            "parameters": [
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            ],
             "responses" : {
               "400" : {
                 "description" : "Bad Request",
@@ -603,6 +693,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 "description" : "Success"
               }
             },
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
@@ -621,6 +712,22 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               {
                 "name" : "cpf",
                 "in" : "query",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
                 "required" : true,
                 "schema" : {
                   "type" : "string"
@@ -679,6 +786,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 }
               }
             },
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
@@ -701,6 +809,24 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               },
               "required" : true
             },
+            "parameters": [
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            ],
             "responses" : {
               "400" : {
                 "description" : "Bad Request",
@@ -753,6 +879,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 }
               }
             },
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
@@ -767,6 +894,24 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "checkout-controller"
             ],
             "operationId" : "findAll",
+            "parameters": [
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            ],
             "responses" : {
               "400" : {
                 "description" : "Bad Request",
@@ -822,6 +967,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 }
               }
             },
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
@@ -889,6 +1035,25 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 "description" : "Success"
               }
             },
+            "parameters": [
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            ],
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
@@ -907,6 +1072,22 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               {
                 "name" : "orderId",
                 "in" : "path",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
                 "required" : true,
                 "schema" : {
                   "type" : "string"
@@ -965,6 +1146,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 }
               }
             },
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
