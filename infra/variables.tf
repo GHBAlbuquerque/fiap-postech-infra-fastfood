@@ -1,3 +1,7 @@
+variable "tf_state_bucket_key" {
+  default = "terraform-state-backend-postech-new"
+}
+
 variable "project_name" {
   default = "fiap-postech-fastfood"
 }
@@ -57,8 +61,3 @@ variable "subnet_id_e" {
 variable "instance_type" {
   default = "t3.medium"
 }
-
-variable "tf_state_bucket_key" {
-  default = "terraform-state-backend-postech-new"
-}
-
