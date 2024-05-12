@@ -53,7 +53,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             },
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
-              "uri" : "http://petstore.execute-api.us-east-1.amazonaws.com/",
+              "uri" : "http://${local.load_balancer_dns}/",
               "responses" : {
                 "default" : {
                   "statusCode" : "200",
@@ -133,7 +133,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             },
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
-              "uri" : "http://petstore.execute-api.us-east-1.amazonaws.com/actuator/health",
+              "uri" : "http://${local.load_balancer_dns}/actuator/health",
               "responses" : {
                 "default" : {
                   "statusCode" : "200",
