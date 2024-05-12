@@ -1,7 +1,3 @@
-variable "tf_state_bucket_key" {
-  default = "terraform-state-backend-postech-new"
-}
-
 variable "project_name" {
   default = "fiap-postech-fastfood"
 }
