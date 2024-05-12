@@ -17,11 +17,11 @@ resource "aws_lb_target_group" "target-group-cluster-fiap" {
   vpc_id = var.vpc_id
 
   health_check {
-    path    = "/actuator/health"
-    port    = 30007
-    matcher = "200"
+    path     = "/actuator/health"
+    port     = 30007
+    matcher  = "200"
     interval = 90
-    timeout = 60
+    timeout  = 60
   }
 }
 
