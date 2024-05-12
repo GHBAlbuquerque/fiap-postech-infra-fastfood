@@ -147,6 +147,38 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             }
           }
         },
+        "/swagger-ui/index" : {
+          "get" : {
+            "operationId" : "Get",
+            "responses" : {
+              "200" : {
+                "description" : "200 response",
+                "headers" : {
+                  "Access-Control-Allow-Origin" : {
+                    "schema" : {
+                      "type" : "string"
+                    }
+                  }
+                },
+                "content" : {}
+              }
+            },
+            "x-amazon-apigateway-integration" : {
+              "httpMethod" : "GET",
+              "uri" : "http://${local.load_balancer_dns}/swagger-ui/index.html",
+              "responses" : {
+                "default" : {
+                  "statusCode" : "200",
+                  "responseParameters" : {
+                    "method.response.header.Access-Control-Allow-Origin" : "'*'"
+                  }
+                }
+              },
+              "passthroughBehavior" : "when_no_match",
+              "type" : "http"
+            }
+          }
+        },
         "/products/{id}" : {
           "put" : {
             "tags" : [
