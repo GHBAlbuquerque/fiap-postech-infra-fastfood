@@ -1,5 +1,6 @@
 locals {
-  load_balancer_dns = aws_alb.alb-cluster-fiap.dns_name
+  load_balancer_dns    = aws_alb.alb-cluster-fiap.dns_name
+  lambda_authorize_uri = "arn:aws:apigateway:${var.region}:lambda:path/2024-04-22/functions/${var.lambda_arn}/invocations"
 }
 
 data "template_file" "api_template" {
@@ -1238,8 +1239,8 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-authorizer" : {
               "type" : "request",
               "identitySource" : "method.request.header.cpf_cliente, method.request.header.senha_cliente",
-              "authorizerCredentials" : "arn:aws:iam::${var.accountid}:role/LabRole",
-              "authorizerUri" : "arn:aws:apigateway:${var.region}:lambda:path/2024-04-22/functions/${var.lambda_arn}/invocations",
+              "authorizerCredentials" : var.lab_role_arn,
+              "authorizerUri" : local.lambda_authorize_uri,
               "authorizerResultTtlInSeconds" : 0
             }
           }

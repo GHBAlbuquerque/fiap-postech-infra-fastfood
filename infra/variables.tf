@@ -58,12 +58,5 @@ variable "instance_type" {
   default = "t3.medium"
 }
 
-variable "principal_arn" {
-  default = "arn:aws:iam::067184771399:role/voclabs"
-}
-
-variable "policy_arn" {
-  default = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-}
 
 
