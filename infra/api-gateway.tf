@@ -37,7 +37,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
       "paths" : {
         "/" : {
           "get" : {
-            "operationId" : "GetPet",
+            "operationId" : "Get",
             "responses" : {
               "200" : {
                 "description" : "200 response",
@@ -53,7 +53,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             },
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
-              "uri" : "http://petstore.execute-api.us-east-1.amazonaws.com/petstore/pets",
+              "uri" : "http://petstore.execute-api.us-east-1.amazonaws.com/",
               "responses" : {
                 "default" : {
                   "statusCode" : "200",
@@ -112,6 +112,38 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               },
               "passthroughBehavior" : "when_no_match",
               "type" : "mock"
+            }
+          }
+        },
+        "/actuator/health" : {
+          "get" : {
+            "operationId" : "Get",
+            "responses" : {
+              "200" : {
+                "description" : "200 response",
+                "headers" : {
+                  "Access-Control-Allow-Origin" : {
+                    "schema" : {
+                      "type" : "string"
+                    }
+                  }
+                },
+                "content" : {}
+              }
+            },
+            "x-amazon-apigateway-integration" : {
+              "httpMethod" : "GET",
+              "uri" : "http://petstore.execute-api.us-east-1.amazonaws.com/actuator/health",
+              "responses" : {
+                "default" : {
+                  "statusCode" : "200",
+                  "responseParameters" : {
+                    "method.response.header.Access-Control-Allow-Origin" : "'*'"
+                  }
+                }
+              },
+              "passthroughBehavior" : "when_no_match",
+              "type" : "http"
             }
           }
         },
