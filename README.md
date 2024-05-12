@@ -1,7 +1,7 @@
 # 🚀 FIAP : Challenge Pós-Tech Software Architecture
-## 🍔 Projeto Fast Food | Arquitetura Limpa
+## 🍔 Projeto Fast Food | Infraestrutura na Cloud (EKS, Load Balancer, Security Group, ApiGateway, Cognito User Pools)
 
-Projeto realizado para a Fase 3 da Pós-Graduação de Arquitetura de Sistemas da FIAP. Respositório de infra (EKS, Load Balancer, Security Group, ApiGateway) para criação de recursos do Tech Challenge.
+Projeto realizado para a Fase 3 da Pós-Graduação de Arquitetura de Sistemas da FIAP. Respositório de infra (EKS, Load Balancer, Security Group, ApiGateway, Cognito User Pools) para criação de recursos do Tech Challenge.
 
 
 ### 👨‍🏫 Grupo
