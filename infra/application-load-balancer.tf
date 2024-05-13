@@ -25,13 +25,9 @@ resource "aws_lb_target_group" "target-group-cluster-fiap" {
   }
 }
 
-module "tg_attach" {
-  depends_on = [aws_eks_cluster.eks_cluster_fiap_postech]
-  source     = "./modules/TargetGroupAttach"
-  for_each   = data.aws_instance.ec2
-
+resource "aws_lb_target_group_attachment" "attach" {
   target_group_arn = aws_lb_target_group.target-group-cluster-fiap.arn
-  target_id        = each.value["id"]
+  target_id        = data.aws_instance.ec2.id
   port             = 30007
 }
 
