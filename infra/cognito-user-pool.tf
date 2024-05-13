@@ -1,6 +1,16 @@
 resource "aws_cognito_user_pool" "user_group_postech_fiap" {
   name = "user_group_postech_fiap"
 
+  auto_verified_attributes = ["email"]
+
+  verification_message_template {
+    default_email_option = "CONFIRM_WITH_CODE"
+  }
+
+  email_configuration {
+    email_sending_account = "COGNITO_DEFAULT"
+  }
+
   password_policy {
     temporary_password_validity_days = 7
     minimum_length                   = 6
@@ -8,6 +18,8 @@ resource "aws_cognito_user_pool" "user_group_postech_fiap" {
     require_symbols                  = false
     require_numbers                  = false
   }
+
+
 }
 
 resource "aws_cognito_user_pool_client" "client" {
