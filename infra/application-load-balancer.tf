@@ -31,7 +31,7 @@ module "tg_attach" {
   for_each   = data.aws_instance.ec2
 
   target_group_arn = aws_lb_target_group.target-group-cluster-fiap.arn
-  target_id        = each.id
+  target_id        = each.value.id
   port             = 30007
 }
 
