@@ -27,7 +27,7 @@ resource "aws_lb_target_group" "target-group-cluster-fiap" {
 
 module "tg_attach" {
   depends_on = [aws_eks_cluster.eks_cluster_fiap_postech]
-  source     = "./modules/tg_attach"
+  source     = "modules/TargetGroupAttach"
   for_each   = data.aws_instance.ec2
 
   target_group_arn = aws_lb_target_group.target-group-cluster-fiap.arn
@@ -37,17 +37,17 @@ module "tg_attach" {
 
 
 resource "aws_lb_listener" "listener" {
-load_balancer_arn = aws_alb.alb-cluster-fiap.arn
-port = "80" #era porta 80 no exemplo
-protocol = "HTTP"
+  load_balancer_arn = aws_alb.alb-cluster-fiap.arn
+  port              = "80" #era porta 80 no exemplo
+  protocol          = "HTTP"
 
-default_action {
-type = "forward"
-target_group_arn = aws_lb_target_group.target-group-cluster-fiap.arn
-}
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.target-group-cluster-fiap.arn
+  }
 }
 
 output "dns_loadbalancer" {
-value = aws_alb.alb-cluster-fiap.dns_name
+  value = aws_alb.alb-cluster-fiap.dns_name
 }
 
