@@ -25,6 +25,8 @@ resource "aws_lb_target_group" "target-group-cluster-fiap" {
   }
 }
 
+#FIXME criar um modulo de attach e fazer uma regra para gerar um attach por instancia encontrada, ou teria o erro
+#FIXME │ Error: multiple EC2 Instances matched; use additional constraints to reduce matches to a single EC2 Instance
 resource "aws_lb_target_group_attachment" "attach" {
   depends_on       = [aws_eks_cluster.eks_cluster_fiap_postech]
   target_group_arn = aws_lb_target_group.target-group-cluster-fiap.arn
