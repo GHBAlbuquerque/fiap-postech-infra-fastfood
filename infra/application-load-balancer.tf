@@ -27,7 +27,7 @@ resource "aws_lb_target_group" "target-group-cluster-fiap" {
 
 module "tg_attach" {
   depends_on = [aws_eks_cluster.eks_cluster_fiap_postech]
-  source     = "modules/TargetGroupAttach"
+  source     = "./modules/TargetGroupAttach"
   for_each   = data.aws_instance.ec2
 
   target_group_arn = aws_lb_target_group.target-group-cluster-fiap.arn
