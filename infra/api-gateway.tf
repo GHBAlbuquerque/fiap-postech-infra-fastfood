@@ -3,23 +3,11 @@ locals {
   lambda_authorize_uri = "arn:aws:apigateway:${var.region}:lambda:path/2024-04-22/functions/${var.lambda_arn}/invocations"
 }
 
-data "template_file" "api_template" {
-  # FIXME: uso de template_file nao funcionou -> invalid OpenAPI Specification
-  template = file("../config/api_definition.json.tpl")
-  vars     = {
-    load_balancer_dns = "http://${local.load_balancer_dns}"
-    accountid         = var.accountid
-    region            = var.region
-    lambda_arn        = var.lambda_arn
-  }
-}
-
 resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
   depends_on  = [aws_alb.alb-cluster-fiap]
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
-  # body = jsonencode(data.template_file.api_template) # FIXME: esta config usando template_file nao funcionou.
   body = jsonencode(
     {
       "openapi" : "3.0.1",
