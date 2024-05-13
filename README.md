@@ -71,9 +71,10 @@ Passo-a-passo:
 6. Obtenha a string de conexão do banco de dados na nuvem Atlas e altere na aplicação, no **Repositório da App**, no arquivo /infra-kubernetes/manifest.yaml - env DB_HOST
 
 > Subindo a Lambda de Autenticação
-1. Ajuste variáveis  e segredos de Actions para CI/CD no **Repositório da Lambda de Autenticação**
+1. Ajuste variáveis e segredos de Actions para CI/CD no **Repositório da Lambda de Autenticação**
    1. Lambda Role
    2. Bucket armazenador dos states terraform -> arquivo main.tf
+   3. ClientId do cognito, no arquivo lambda_auth.py (client_id)
 2. Suba a lambda via CICD do repositório
 
 > Subindo a Infraestrutura do projeto
@@ -109,6 +110,12 @@ Passo-a-passo:
 8. Para realizar chamadas aos endpoints http do gateway, utilize os seguintes headers:
    1. cpf_cliente -> valor cadastrado previamente: 93678719023
    2. senha_cliente -> valor cadastrado previamente: FIAPauth123_
+
+> (opcional) Criar usuário e utilizar
+1. Crie um usuário utilizando o endpoint POST '/clients'
+2. O username será o cpf informado
+3. Confirme a criação do usuário para permitir o uso em endpoints através de uma requisição para o endpoint POST '/clients/confirmation'
+4. Utilize o cpf e senha cadastrados para fazer solicitações como orientado acima
 
 Ex. de chamada:
 ![](misc/chamada_gateway_exemplo.png)

@@ -3,23 +3,11 @@ locals {
   lambda_authorize_uri = "arn:aws:apigateway:${var.region}:lambda:path/2024-04-22/functions/${var.lambda_arn}/invocations"
 }
 
-data "template_file" "api_template" {
-  # FIXME: uso de template_file nao funcionou -> invalid OpenAPI Specification
-  template = file("../config/api_definition.json.tpl")
-  vars     = {
-    load_balancer_dns = "http://${local.load_balancer_dns}"
-    accountid         = var.accountid
-    region            = var.region
-    lambda_arn        = var.lambda_arn
-  }
-}
-
 resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
   depends_on  = [aws_alb.alb-cluster-fiap]
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
-  # body = jsonencode(data.template_file.api_template) # FIXME: esta config usando template_file nao funcionou.
   body = jsonencode(
     {
       "openapi" : "3.0.1",
@@ -566,7 +554,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "order-controller"
             ],
             "operationId" : "getOrders",
-            "parameters": [
+            "parameters" : [
               {
                 "name" : "cpf_cliente",
                 "in" : "header",
@@ -662,7 +650,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               },
               "required" : true
             },
-            "parameters": [
+            "parameters" : [
               {
                 "name" : "cpf_cliente",
                 "in" : "header",
@@ -841,7 +829,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               },
               "required" : true
             },
-            "parameters": [
+            "parameters" : [
               {
                 "name" : "cpf_cliente",
                 "in" : "header",
@@ -911,12 +899,59 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 }
               }
             },
-            "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/clients"
+            }
+          }
+        },
+        "/clients/confirmation" : {
+          "post" : {
+            "tags" : ["client-controller"], "operationId" : "confirmSignUp",
+            "requestBody" : {
+              "content" : {
+                "application/json" : { "schema" : { "$ref" : "#/components/schemas/ConfirmSignUpRequest" } }
+              }, "required" : true
+            },
+            "parameters" : [
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            ],
+            "responses" : {
+              "400" : {
+                "description" : "Bad Request",
+                "content" : { "application/json" : { "schema" : { "$ref" : "#/components/schemas/ExceptionDetails" } } }
+              }, "404" : {
+                "description" : "Not Found",
+                "content" : { "application/json" : { "schema" : { "$ref" : "#/components/schemas/ExceptionDetails" } } }
+              }, "500" : {
+                "description" : "Internal Server Error",
+                "content" : { "application/json" : { "schema" : { "$ref" : "#/components/schemas/ExceptionDetails" } } }
+              }, "200" : {
+                "description" : "Success", "content" : { "application/json" : { "schema" : { "type" : "boolean" } } }
+              }
+            },
+            "x-amazon-apigateway-integration" : {
+              "httpMethod" : "POST",
+              "payloadFormatVersion" : "1.0",
+              "type" : "HTTP_PROXY",
+              "uri" : "http://${local.load_balancer_dns}/clients/confirmation"
             }
           }
         },
@@ -926,7 +961,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "checkout-controller"
             ],
             "operationId" : "findAll",
-            "parameters": [
+            "parameters" : [
               {
                 "name" : "cpf_cliente",
                 "in" : "header",
@@ -1067,7 +1102,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 "description" : "Success"
               }
             },
-            "parameters": [
+            "parameters" : [
               {
                 "name" : "cpf_cliente",
                 "in" : "header",
@@ -1365,6 +1400,11 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               }
             }
           },
+          "ConfirmSignUpRequest" : {
+            "required" : ["code", "cpf"],
+            "type" : "object",
+            "properties" : { "cpf" : { "type" : "string" }, "code" : { "type" : "string" } }
+          },
           "CheckoutRequest" : {
             "type" : "object",
             "properties" : {
@@ -1457,6 +1497,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               }
             }
           },
+
           "CheckoutResponse" : {
             "type" : "object",
             "properties" : {
