@@ -50,10 +50,6 @@ variable "subnet_id_d" {
   default = "subnet-d"
 }
 
-variable "instance_type" {
-  default = "t3.medium"
-}
-
 variable "application_load_balancer_dns" {
   default = "application_load_balancer_dns"
 }
