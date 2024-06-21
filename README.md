@@ -34,12 +34,15 @@ Tecnologias utilizadas:
 
 ### Rodando com CICD e infra descentralizada
 
-Compõe esta entrega:
+Compõem esta entrega:
+* Repositório das Tabelas Dynamo - https://github.com/GHBAlbuquerque/fiap-postech-infra-dynamo
+* Repositório da Base de Dados RDS - https://github.com/GHBAlbuquerque/fiap-postech-infra-rds
 * Repositório da Lambda de Autenticação - https://github.com/GHBAlbuquerque/fiap-postech-lambda-auth-fastfood
 * Repositório da Infra (EKS, Load Balancer, Security Group) - https://github.com/GHBAlbuquerque/fiap-postech-infra-fastfood-eks
 * Repositório da Infra (ApiGateway e Cognito User Pools) - https://github.com/GHBAlbuquerque/fiap-postech-infra-fastfood
-* Repositório da Database - https://github.com/GHBAlbuquerque/fiap-postech-infra-database
-* Repositório da App - https://github.com/GHBAlbuquerque/fiap-postech-fastfood
+* Repositório da App de Cliente - https://github.com/GHBAlbuquerque/fiap-postech-fastfood-cliente
+* Repositório da App de Produto - https://github.com/GHBAlbuquerque/fiap-postech-fastfood-produto
+* Repositório da App de Pedido - https://github.com/GHBAlbuquerque/fiap-postech-fastfood-pedido
 
 
 Faça o download ou clone este projeto e abra em uma IDE (preferencialmente IntelliJ).
@@ -59,7 +62,10 @@ Passo-a-passo:
 2. Altere credenciais nos secrets para actions dos repositórios
 3. Altere credenciais no arquivo .credentials na pasta .aws no seu computador
 
-> Subindo o Banco de Dados
+> Subindo as tabelas Dynamo
+1. TBD
+
+> Subindo o Banco de Dados RDS
 1. TBD
 
 > Subindo a Lambda de Autenticação
@@ -103,6 +109,8 @@ Passo-a-passo:
    1. Vá em API Gateway > api_gateway_fiap_postech > estágios > pegar o valor Invoke Url
 
 > Subindo a App
+1. TBD
+```
 1. Abra o **Repositório da App**
 2. Ajuste segredos de Actions para CI/CD no repositório
 3. Ajuste URI do repositório remoto ECR AWS (accountid e region) no repositório da aplicação, arquivo infra-kubernetes/manifest.yaml
@@ -113,6 +121,7 @@ Passo-a-passo:
 8. Para realizar chamadas aos endpoints http do gateway, utilize os seguintes headers:
    1. cpf_cliente -> valor cadastrado previamente: 93678719023
    2. senha_cliente -> valor cadastrado previamente: FIAPauth123_
+```
 
 > (opcional) Criar usuário e utilizar
 1. Crie um usuário utilizando o endpoint POST '/clients'
