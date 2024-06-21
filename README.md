@@ -1,5 +1,5 @@
 # 🚀 FIAP : Challenge Pós-Tech Software Architecture
-## 🍔 Projeto Fast Food | Infraestrutura na Cloud (EKS, Load Balancer, Security Group, ApiGateway, Cognito User Pools)
+## 🍔 Projeto Fast Food | Infraestrutura na Cloud (ApiGateway e Cognito User Pools)
 
 Projeto realizado para a Fase 3 da Pós-Graduação de Arquitetura de Sistemas da FIAP. Respositório de infra (EKS, Load Balancer, Security Group, ApiGateway, Cognito User Pools) para criação de recursos do Tech Challenge.
 
@@ -7,10 +7,7 @@ Projeto realizado para a Fase 3 da Pós-Graduação de Arquitetura de Sistemas d
 ### 👨‍🏫 Grupo
 
 Integrantes:
-- Diego S. Silveira (RM352891)
 - Giovanna H. B. Albuquerque (RM352679)
-- Kelvin Vieira (RM352728)
-- Wellington Vieira (RM352970)
 
 ### 📍 DDD
 
@@ -39,7 +36,8 @@ Tecnologias utilizadas:
 
 Compõe esta entrega:
 * Repositório da Lambda de Autenticação - https://github.com/GHBAlbuquerque/fiap-postech-lambda-auth-fastfood
-* Repositório da Infra - https://github.com/GHBAlbuquerque/fiap-postech-infra-fastfood
+* Repositório da Infra (EKS, Load Balancer, Security Group) - https://github.com/GHBAlbuquerque/fiap-postech-infra-fastfood-eks
+* Repositório da Infra (ApiGateway e Cognito User Pools) - https://github.com/GHBAlbuquerque/fiap-postech-infra-fastfood
 * Repositório da Database - https://github.com/GHBAlbuquerque/fiap-postech-infra-database
 * Repositório da App - https://github.com/GHBAlbuquerque/fiap-postech-fastfood
 
@@ -48,7 +46,6 @@ Faça o download ou clone este projeto e abra em uma IDE (preferencialmente Inte
 É preciso ter:
 
     - Uma conta cadastrada na Cloud AWS
-    - Uma conta cadastrada na nuvem Atlas
 
 ### 💿 Getting started - Rodando em cluster kubernetes + Load balancer + Api Gateway na AWS
 
@@ -62,13 +59,8 @@ Passo-a-passo:
 2. Altere credenciais nos secrets para actions dos repositórios
 3. Altere credenciais no arquivo .credentials na pasta .aws no seu computador
 
-> Subindo o Banco de Dados na Atlas
-1. Para criar o banco de dados na nuvem atlas, utilie o **Repositório da Database**
-2. Ajuste segredos de Actions para CI/CD no repositório
-3. Ajuste os valores de variáveis da AWS e da nuvem Atlas no arquivo terraform.tfvars
-4. Suba o banco na nuvem Atlas via CI/CD do repositório
-5. Crie as collections de acordo com o script em /script/mongo-init.js
-6. Obtenha a string de conexão do banco de dados na nuvem Atlas e altere na aplicação, no **Repositório da App**, no arquivo /infra-kubernetes/manifest.yaml - env DB_HOST
+> Subindo o Banco de Dados
+1. TBD
 
 > Subindo a Lambda de Autenticação
 1. Ajuste variáveis e segredos de Actions para CI/CD no **Repositório da Lambda de Autenticação**
@@ -76,6 +68,18 @@ Passo-a-passo:
    2. Bucket armazenador dos states terraform -> arquivo main.tf
    3. ClientId do cognito, no arquivo lambda_auth.py (client_id)
 2. Suba a lambda via CICD do repositório
+
+> Subindo a Infraestrutura do projeto
+1. Ajuste variáveis e segredos de Actions para CI/CD no **Repositório da Infra EKS**
+   1. AccountId
+   2. Role Arn
+   3. VPC Id
+   4. VPC CIDR
+   5. subnets
+   6. Bucket armazenador dos states terraform -> arquivo main.tf
+2. Suba infraestrutura via CICD do repositório (LoadBalancer, Security Group e EKS Cluster)
+3. Ajuste Security Group gerado automaticamente pelo cluster para liberar tráfego da VPC (ver CIDR) e do Security Group usado no ALB (id). Liberar ‘Todo o Tráfego’.
+
 
 > Subindo a Infraestrutura do projeto
 1. Ajuste variáveis e segredos de Actions para CI/CD no **Repositório da Infra**
@@ -87,16 +91,15 @@ Passo-a-passo:
    6. VPC CIDR
    7. subnets
    8. Bucket armazenador dos states terraform -> arquivo main.tf
-2. Suba infraestrutura via CICD do repositório (Api Gateway, LoadBalancer, Secuirty Group, EKS Cluster)
-3. Ajuste Security Group gerado automaticamente pelo cluster para liberar tráfego da VPC (ver CIDR) e do Security Group usado no ALB (id). Liberar ‘Todo o Tráfego’.
-4. Ajuste bug do autorizador do API Gateway que monstra erro 500 e mensagem ‘null’:
+2. Suba infraestrutura via CICD do repositório (Api Gateway e Cognito User Pools)
+3. Ajuste bug do autorizador do API Gateway que monstra erro 500 e mensagem ‘null’:
    1. Ir em ‘Autorizadores’
    2. Selecionar ‘lambda_authorizer_cpf’ e editar
    3. Escolher a função lambda da lista
    4. Salvar alterações
    5. Realizar deploy da API no estágio
-5. Teste conexão chamando o DNS do loadbalancer na url: ``{DNS Load Balancer}/actuator/health``
-6. Obtenha endereço do stage do API Gateway no console para realizar chamadas
+4. Teste conexão chamando o DNS do loadbalancer na url: ``{DNS Load Balancer}/actuator/health``
+5. Obtenha endereço do stage do API Gateway no console para realizar chamadas
    1. Vá em API Gateway > api_gateway_fiap_postech > estágios > pegar o valor Invoke Url
 
 > Subindo a App
