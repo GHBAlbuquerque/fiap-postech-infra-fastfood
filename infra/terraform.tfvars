@@ -12,4 +12,4 @@ subnet_id_c    = "subnet-05685364d9e045913"
 subnet_id_d    = "subnet-066ce0c3304da4788"
 subnet_id_e    = "subnet-0bdae3752039a482f"
 instance_type  = "t3.medium"
-
+application_load_balancer_dns = "------" #TODO

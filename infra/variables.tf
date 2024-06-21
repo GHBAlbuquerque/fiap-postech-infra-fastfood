@@ -57,3 +57,7 @@ variable "subnet_id_e" {
 variable "instance_type" {
   default = "t3.medium"
 }
+
+variable "application_load_balancer_dns" {
+  default = "application_load_balancer_dns"
+}

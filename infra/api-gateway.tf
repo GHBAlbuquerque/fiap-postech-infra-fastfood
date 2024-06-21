@@ -1,10 +1,9 @@
 locals {
-  load_balancer_dns    = aws_alb.alb-cluster-fiap.dns_name
+  load_balancer_dns    = var.application_load_balancer_dns
   lambda_authorize_uri = "arn:aws:apigateway:${var.region}:lambda:path/2024-04-22/functions/${var.lambda_arn}/invocations"
 }
 
 resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
-  depends_on  = [aws_alb.alb-cluster-fiap]
   name        = "api_gateway_fiap_postech"
   description = "Projeto de um sistema para lanchonete realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP"
 
