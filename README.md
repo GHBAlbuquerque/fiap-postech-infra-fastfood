@@ -69,7 +69,7 @@ Passo-a-passo:
    3. ClientId do cognito, no arquivo lambda_auth.py (client_id)
 2. Suba a lambda via CICD do repositório
 
-> Subindo a Infraestrutura do projeto
+> Subindo a Infraestrutura do projeto (LoadBalancer, Security Group e EKS Cluster)
 1. Ajuste variáveis e segredos de Actions para CI/CD no **Repositório da Infra EKS**
    1. AccountId
    2. Role Arn
@@ -81,7 +81,7 @@ Passo-a-passo:
 3. Ajuste Security Group gerado automaticamente pelo cluster para liberar tráfego da VPC (ver CIDR) e do Security Group usado no ALB (id). Liberar ‘Todo o Tráfego’.
 
 
-> Subindo a Infraestrutura do projeto
+> Subindo a Infraestrutura do projeto (Api Gateway e Cognito User Pools)
 1. Ajuste variáveis e segredos de Actions para CI/CD no **Repositório da Infra**
    1. AccountId
    2. Nome da Lambda
