@@ -35,11 +35,11 @@ Tecnologias utilizadas:
 ### Rodando com CICD e infra descentralizada
 
 Compõem esta entrega:
-* Repositório das Tabelas Dynamo - https://github.com/GHBAlbuquerque/fiap-postech-infra-dynamo
-* Repositório da Base de Dados RDS - https://github.com/GHBAlbuquerque/fiap-postech-infra-rds
 * Repositório da Lambda de Autenticação - https://github.com/GHBAlbuquerque/fiap-postech-lambda-auth-fastfood
 * Repositório da Infra (EKS, Load Balancer, Security Group) - https://github.com/GHBAlbuquerque/fiap-postech-infra-fastfood-eks
 * Repositório da Infra (ApiGateway e Cognito User Pools) - https://github.com/GHBAlbuquerque/fiap-postech-infra-fastfood
+* Repositório das Tabelas Dynamo - https://github.com/GHBAlbuquerque/fiap-postech-infra-dynamo
+* Repositório da Base de Dados RDS - https://github.com/GHBAlbuquerque/fiap-postech-infra-rds
 * Repositório da App de Cliente - https://github.com/GHBAlbuquerque/fiap-postech-fastfood-cliente
 * Repositório da App de Produto - https://github.com/GHBAlbuquerque/fiap-postech-fastfood-produto
 * Repositório da App de Pedido - https://github.com/GHBAlbuquerque/fiap-postech-fastfood-pedido
@@ -61,12 +61,6 @@ Passo-a-passo:
 1. Obtenha credenciais de aws_access_key_id, aws_secret_access_key e aws_session_token da AWS Lab na AWS Academy ou na sua conta AWS.
 2. Altere credenciais nos secrets para actions dos repositórios
 3. Altere credenciais no arquivo .credentials na pasta .aws no seu computador
-
-> Subindo as tabelas Dynamo
-1. TBD
-
-> Subindo o Banco de Dados RDS
-1. TBD
 
 > Subindo a Lambda de Autenticação
 1. Ajuste variáveis e segredos de Actions para CI/CD no **Repositório da Lambda de Autenticação**
@@ -107,6 +101,12 @@ Passo-a-passo:
 4. Teste conexão chamando o DNS do loadbalancer na url: ``{DNS Load Balancer}/actuator/health``
 5. Obtenha endereço do stage do API Gateway no console para realizar chamadas
    1. Vá em API Gateway > api_gateway_fiap_postech > estágios > pegar o valor Invoke Url
+
+> Subindo as tabelas Dynamo
+1. TBD
+
+> Subindo o Banco de Dados RDS
+1. TBD
 
 > Subindo a App
 1. TBD
