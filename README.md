@@ -54,7 +54,7 @@ Faça o download ou clone este projeto e abra em uma IDE (preferencialmente Inte
 
 Antes de iniciar:
 1. Criar manualmente bucket s3 na conta com para guardar os states do terraform (utilizei o nome ‘terraform-state-backend-postech-new’)
-2. Criar manualmente repositório ECR na conta com o nome ‘fiap-pos-tech-fastfood’
+2. Criar manualmente repositórios ECR na conta com os nomes ‘fiap_postech_fastfood_cliente’, ‘fiap_postech_fastfood_produto’ e ‘fiap_postech_fastfood_pedido’
 3. Caso não esteja usando AWS Academy, é necessário criar também Policies e Roles para os serviços. Esta etapa não foi feita na entrega da Pós e foram usadas as Roles padrão do laboratório.
 
 Passo-a-passo:

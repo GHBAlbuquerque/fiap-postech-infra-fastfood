@@ -167,6 +167,105 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
           }
         },
         "/products/{id}" : {
+          "get" : {
+            "tags" : [
+              "product-controller"
+            ],
+            "operationId" : "findProductByIdAndName",
+            "parameters" : [
+              {
+                "name" : "id",
+                "in" : "path",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "name",
+                "in" : "query",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            ],
+            "responses" : {
+              "400" : {
+                "description" : "Bad Request",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "403" : {
+                "description" : "Forbidden",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "404" : {
+                "description" : "Not Found",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "500" : {
+                "description" : "Internal Server Error",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "200" : {
+                "description" : "Success",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/FullProductResponse"
+                    }
+                  }
+                }
+              }
+            },
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
+            "x-amazon-apigateway-integration" : {
+              "httpMethod" : "PUT",
+              "payloadFormatVersion" : "1.0",
+              "type" : "HTTP_PROXY",
+              "uri" : "http://${local.load_balancer_dns}/products/{id}"
+            }
+          },
           "put" : {
             "tags" : [
               "product-controller"
@@ -254,7 +353,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 "content" : {
                   "application/json" : {
                     "schema" : {
-                      "$ref" : "#/components/schemas/BaseProductResponse"
+                      "$ref" : "#/components/schemas/FullProductResponse"
                     }
                   }
                 }
@@ -358,12 +457,12 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "tags" : [
               "product-controller"
             ],
-            "operationId" : "findProduct",
+            "operationId" : "findProducts",
             "parameters" : [
               {
-                "name" : "category",
+                "name" : "type",
                 "in" : "query",
-                "required" : true,
+                "required" : false,
                 "schema" : {
                   "type" : "string",
                   "enum" : [
@@ -438,7 +537,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                     "schema" : {
                       "type" : "array",
                       "items" : {
-                        "$ref" : "#/components/schemas/BaseProductResponse"
+                        "$ref" : "#/components/schemas/FullProductResponse"
                       }
                     }
                   }
@@ -532,7 +631,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 "content" : {
                   "application/json" : {
                     "schema" : {
-                      "$ref" : "#/components/schemas/BaseProductResponse"
+                      "$ref" : "#/components/schemas/FullProductResponse"
                     }
                   }
                 }
@@ -721,12 +820,12 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             }
           }
         },
-        "/clients" : {
+        "/customers" : {
           "get" : {
             "tags" : [
-              "client-controller"
+              "customer-controller"
             ],
-            "operationId" : "getClientByCpf",
+            "operationId" : "getCustomerByCpf",
             "parameters" : [
               {
                 "name" : "cpf",
@@ -810,14 +909,14 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "http://${local.load_balancer_dns}/clients"
+              "uri" : "http://${local.load_balancer_dns}/customers"
             }
           },
           "post" : {
             "tags" : [
-              "client-controller"
+              "customer-controller"
             ],
-            "operationId" : "registerClient",
+            "operationId" : "registerCustomer",
             "requestBody" : {
               "content" : {
                 "application/json" : {
@@ -902,13 +1001,13 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "http://${local.load_balancer_dns}/clients"
+              "uri" : "http://${local.load_balancer_dns}/customers"
             }
           }
         },
-        "/clients/confirmation" : {
+        "/customers/confirmation" : {
           "post" : {
-            "tags" : ["client-controller"], "operationId" : "confirmSignUp",
+            "tags" : ["customer-controller"], "operationId" : "confirmSignUp",
             "requestBody" : {
               "content" : {
                 "application/json" : { "schema" : { "$ref" : "#/components/schemas/ConfirmSignUpRequest" } }
@@ -950,7 +1049,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
-              "uri" : "http://${local.load_balancer_dns}/clients/confirmation"
+              "uri" : "http://${local.load_balancer_dns}/customers/confirmation"
             }
           }
         },
@@ -1294,9 +1393,12 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               }
             }
           },
-          "BaseProductResponse" : {
+          "FullProductResponse" : {
             "type" : "object",
             "properties" : {
+              "id" : {
+                "type" : "string"
+              },
               "name" : {
                 "type" : "string"
               },
