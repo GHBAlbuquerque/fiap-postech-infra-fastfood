@@ -182,7 +182,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 }
               },
               {
-                "name" : "name",
+                "name" : "type",
                 "in" : "query",
                 "required" : true,
                 "schema" : {
