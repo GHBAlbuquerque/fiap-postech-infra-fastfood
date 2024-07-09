@@ -23,12 +23,12 @@ Solução arquitetônica realizada (Cloud AWS) completa:
 
 ### 💻 Tecnologias
 
-Tecnologias utilizadas:
+Tecnologias utilizadas no projeto:
 
 * Cloud AWS
 * Terraform
 * Python
-
+* Java
 
 ## 🎬 Como executar este projeto?
 
@@ -77,8 +77,9 @@ Passo-a-passo:
    4. VPC CIDR
    5. subnets
    6. Bucket armazenador dos states terraform -> arquivo main.tf
-2. Suba infraestrutura via CICD do repositório (LoadBalancer, Security Group e EKS Cluster)
-3. Ajuste Security Group gerado automaticamente pelo cluster para liberar tráfego da VPC (ver CIDR) e do Security Group usado no ALB (id). Liberar ‘Todo o Tráfego’.
+2. Ajuste a variável VPC_ID no arquivo .github/workflows/deploy-pipeline
+3. Suba infraestrutura via CICD do repositório (LoadBalancer, Security Group e EKS Cluster)
+4. Ajuste Security Group gerado automaticamente pelo cluster para liberar tráfego da VPC (ver CIDR) e do Security Group usado no ALB (id). Liberar ‘Todo o Tráfego’.
 
 
 > Subindo a Infraestrutura do projeto (Api Gateway e Cognito User Pools)
@@ -107,8 +108,9 @@ Passo-a-passo:
 
 > Subindo o Banco de Dados RDS
 1. TBD
+2. Corrigir DB_HOST mudando o endpoint do RDS no arquivo manifest
 
-> Subindo a App
+> Subindo a App de Cliente
 1. TBD
 ```
 1. Abra o **Repositório da App**
@@ -122,6 +124,12 @@ Passo-a-passo:
    1. cpf_cliente -> valor cadastrado previamente: 93678719023
    2. senha_cliente -> valor cadastrado previamente: FIAPauth123_
 ```
+
+> Subindo a App de Produto
+1. TBD
+
+> Subindo a App de Pedido
+1. TBD
 
 > (opcional) Criar usuário e utilizar
 1. Crie um usuário utilizando o endpoint POST '/clients'

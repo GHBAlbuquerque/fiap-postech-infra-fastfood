@@ -260,7 +260,10 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             },
             "security" : [{ "lambda_authorizer_cpf" : [] }],
             "x-amazon-apigateway-integration" : {
-              "httpMethod" : "PUT",
+              "httpMethod" : "GET",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_produto'",
+              },
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/products/{id}"
@@ -363,6 +366,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "PUT",
               "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_produto'",
+              },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/products/{id}"
             }
@@ -447,6 +453,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "DELETE",
               "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_produto'",
+              },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/products/{id}"
             }
@@ -548,6 +557,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_produto'",
+              },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/products"
             }
@@ -641,6 +653,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_produto'",
+              },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/products"
             }
@@ -729,6 +744,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_pedido'",
+              },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/orders"
             }
@@ -815,6 +833,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_pedido'",
+              },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/orders"
             }
@@ -908,6 +929,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_cliente'",
+              },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/customers"
             }
@@ -1000,6 +1024,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_cliente'",
+              },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/customers"
             }
@@ -1048,6 +1075,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_cliente'",
+              },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/customers/confirmation"
             }
@@ -1136,6 +1166,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_pedido'",
+              },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/checkout"
             }
@@ -1222,6 +1255,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_pedido'",
+              },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/checkout"
             }
@@ -1315,6 +1351,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_pedido'",
+              },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/payment-status"
             }
