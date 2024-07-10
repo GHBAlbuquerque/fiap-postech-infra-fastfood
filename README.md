@@ -1,13 +1,16 @@
 # 🚀 FIAP : Challenge Pós-Tech Software Architecture
-## 🍔 Projeto Fast Food | Infraestrutura na Cloud (ApiGateway e Cognito User Pools)
+## 🍔 Projeto Fast Food |  Infraestrutura na Cloud (ApiGateway e Cognito User Pools)
 
-Projeto realizado para a Fase 3 da Pós-Graduação de Arquitetura de Sistemas da FIAP. Respositório de infra (EKS, Load Balancer, Security Group, ApiGateway, Cognito User Pools) para criação de recursos do Tech Challenge.
+Projeto realizado para a Pós-Graduação de Arquitetura de Sistemas da FIAP. Criação de um sistema de autoatendimento para uma lanchonete.
 
+<br/>
 
 ### 👨‍🏫 Grupo
 
 Integrantes:
 - Giovanna H. B. Albuquerque (RM352679)
+
+<br/>
 
 ### 📍 DDD
 
@@ -16,10 +19,14 @@ Os resultados destes estudos estão disponíveis no link abaixo:
 
 **🔗 MIRO com DDD: https://miro.com/app/board/uXjVNMo8BCE=/?share_link_id=24975843522**
 
+<br/>
+
 ### 📐 Desenho de Solução (Arquitetura)
 
 Solução arquitetônica realizada (Cloud AWS) completa:
-![](misc/sol_fase_3.drawio.svg)
+![](misc/sol_fase_4.drawio.svg)
+
+<br/>
 
 ### 💻 Tecnologias
 
@@ -30,27 +37,35 @@ Tecnologias utilizadas no projeto:
 * Python
 * Java
 
+<br/>
+
 ## 🎬 Como executar este projeto?
 
-### Rodando com CICD e infra descentralizada
-
 Compõem esta entrega:
-* Repositório da Lambda de Autenticação - https://github.com/GHBAlbuquerque/fiap-postech-lambda-auth-fastfood
-* Repositório da Infra (EKS, Load Balancer, Security Group) - https://github.com/GHBAlbuquerque/fiap-postech-infra-fastfood-eks
-* Repositório da Infra (ApiGateway e Cognito User Pools) - https://github.com/GHBAlbuquerque/fiap-postech-infra-fastfood
-* Repositório das Tabelas Dynamo - https://github.com/GHBAlbuquerque/fiap-postech-infra-dynamo
-* Repositório da Base de Dados RDS - https://github.com/GHBAlbuquerque/fiap-postech-infra-rds
-* Repositório da App de Cliente - https://github.com/GHBAlbuquerque/fiap-postech-fastfood-cliente
-* Repositório da App de Produto - https://github.com/GHBAlbuquerque/fiap-postech-fastfood-produto
-* Repositório da App de Pedido - https://github.com/GHBAlbuquerque/fiap-postech-fastfood-pedido
+> * Repositório da Lambda de Autenticação
+>   * https://github.com/GHBAlbuquerque/fiap-postech-lambda-auth-fastfood
+> * Repositório da Infra (EKS, Load Balancer, Security Group)
+>   * https://github.com/GHBAlbuquerque/fiap-postech-infra-fastfood-eks
+> * Repositório da Infra (ApiGateway e Cognito User Pools)
+>   * https://github.com/GHBAlbuquerque/fiap-postech-infra-fastfood
+> * Repositório das Tabelas Dynamo
+>    * https://github.com/GHBAlbuquerque/fiap-postech-infra-dynamo
+> * Repositório da Base de Dados RDS
+>    * https://github.com/GHBAlbuquerque/fiap-postech-infra-rds
+> * Repositório da App de Cliente
+>    * https://github.com/GHBAlbuquerque/fiap-postech-fastfood-cliente
+> * Repositório da App de Produto
+>    * https://github.com/GHBAlbuquerque/fiap-postech-fastfood-produto
+> * Repositório da App de Pedido
+>    * https://github.com/GHBAlbuquerque/fiap-postech-fastfood-pedido
 
+
+### 💿 Getting started - Rodando com CICD e infra descentralizada na Cloud AWS
 
 Faça o download ou clone este projeto e abra em uma IDE (preferencialmente IntelliJ).
 É preciso ter:
 
-    - Uma conta cadastrada na Cloud AWS
-
-### 💿 Getting started - Rodando em cluster kubernetes + Load balancer + Api Gateway na AWS
+    - Uma conta cadastrada na Cloud AWS / AWS Academy
 
 Antes de iniciar:
 1. Criar manualmente bucket s3 na conta com para guardar os states do terraform (utilizei o nome ‘terraform-state-backend-postech-new’)
@@ -58,60 +73,35 @@ Antes de iniciar:
 3. Caso não esteja usando AWS Academy, é necessário criar também Policies e Roles para os serviços. Esta etapa não foi feita na entrega da Pós e foram usadas as Roles padrão do laboratório.
 
 Passo-a-passo:
-1. Obtenha credenciais de aws_access_key_id, aws_secret_access_key e aws_session_token da AWS Lab na AWS Academy ou na sua conta AWS.
+1. Obtenha credenciais de aws_access_key_id, aws_secret_access_key e aws_session_token da sua conta na AWS Academy ou na AWS.
 2. Altere credenciais nos secrets para actions dos repositórios
-3. Altere credenciais no arquivo .credentials na pasta .aws no seu computador
-
-> Subindo a Lambda de Autenticação
-1. Ajuste variáveis e segredos de Actions para CI/CD no **Repositório da Lambda de Autenticação**
-   1. Lambda Role
-   2. Bucket armazenador dos states terraform -> arquivo main.tf
-   3. ClientId do cognito, no arquivo lambda_auth.py (client_id)
-2. Suba a lambda via CICD do repositório
+3. Altere credenciais no arquivo .credentials na pasta .aws no seu computador caso deseje rodar a aplicação localmente ou usar o aws cli
 
 > Subindo a Infraestrutura do projeto (LoadBalancer, Security Group e EKS Cluster)
-1. Ajuste variáveis e segredos de Actions para CI/CD no **Repositório da Infra EKS**
-   1. AccountId
-   2. Role Arn
-   3. VPC Id
-   4. VPC CIDR
-   5. subnets
-   6. Bucket armazenador dos states terraform -> arquivo main.tf
-2. Ajuste a variável VPC_ID no arquivo .github/workflows/deploy-pipeline
+1. Ajuste o bucket para armazenamento de estado **Repositório da Infra EKS**
+    1.   backend "s3" { bucket  = "${SEU BUCKET}" ... } -> arquivo main.tf
+2. Ajuste variáveis e segredos de Actions para CI/CD no arquivo terraform.tfvars
 3. Suba infraestrutura via CICD do repositório (LoadBalancer, Security Group e EKS Cluster)
-4. Ajuste Security Group gerado automaticamente pelo cluster para liberar tráfego da VPC (ver CIDR) e do Security Group usado no ALB (id). Liberar ‘Todo o Tráfego’.
-
-
-> Subindo a Infraestrutura do projeto (Api Gateway e Cognito User Pools)
-1. Ajuste variáveis e segredos de Actions para CI/CD no **Repositório da Infra**
-   1. AccountId
-   2. Nome da Lambda
-   3. Arn da Lambda criada para autenticação
-   4. Role Arn
-   5. VPC Id
-   6. VPC CIDR
-   7. subnets
-   8. Bucket armazenador dos states terraform -> arquivo main.tf
-2. Suba infraestrutura via CICD do repositório (Api Gateway e Cognito User Pools)
-3. Ajuste bug do autorizador do API Gateway que monstra erro 500 e mensagem ‘null’:
-   1. Ir em ‘Autorizadores’
-   2. Selecionar ‘lambda_authorizer_cpf’ e editar
-   3. Escolher a função lambda da lista
-   4. Salvar alterações
-   5. Realizar deploy da API no estágio
-4. Teste conexão chamando o DNS do loadbalancer na url: ``{DNS Load Balancer}/actuator/health``
-5. Obtenha endereço do stage do API Gateway no console para realizar chamadas
-   1. Vá em API Gateway > api_gateway_fiap_postech > estágios > pegar o valor Invoke Url
+4. Ajuste o Security Group gerado automaticamente pelo cluster 
+   1. Libere 'Todo o Tráfego' para a VPC (ver CIDR)
+   2. Libere 'Todo o Tráfego' para o Security Group criado manualmente e usado no ALB (obter id do security group)
 
 > Subindo as tabelas Dynamo
-1. TBD
+1. Ajuste o bucket para armazenamento de estado **Repositório das Tabelas Dynamo**
+    1.   backend "s3" { bucket  = "${SEU BUCKET}" ... } -> arquivo main.tf
+2. Ajuste variáveis e segredos de Actions para CI/CD no arquivo terraform.tfvars
+3. Suba infraestrutura via CICD do repositório
 
 > Subindo o Banco de Dados RDS
-1. TBD
-2. Corrigir DB_HOST mudando o endpoint do RDS no arquivo manifest
+1. Ajuste o bucket para armazenamento de estado **Repositório da Base de Dados RDS**
+    1.   backend "s3" { bucket  = "${SEU BUCKET}" ... } -> arquivo main.tf
+2. Ajuste variáveis e segredos de Actions para CI/CD no arquivo terraform.tfvars
+3. Suba infraestrutura via CICD do repositório
+
 
 > Subindo a App de Cliente
 1. TBD
+2. Corrigir DB_HOST mudando o endpoint do RDS no arquivo manifest
 ```
 1. Abra o **Repositório da App**
 2. Ajuste segredos de Actions para CI/CD no repositório
@@ -131,6 +121,31 @@ Passo-a-passo:
 > Subindo a App de Pedido
 1. TBD
 
+> Subindo a Lambda de Autenticação
+1. Ajuste o bucket para armazenamento de estado **Repositório da Lambda de Autenticação**
+    1.   backend "s3" { bucket  = "${SEU BUCKET}" ... } -> arquivo main.tf
+2. Ajuste variáveis e segredos de Actions para CI/CD no arquivo terraform.tfvars
+3. Suba a lambda via CICD do repositório
+4. Após a criação do Cognito no passo 'Subindo a Infraestrutura do projeto (Api Gateway e Cognito User Pools)':
+    1. Obtenha o ID do Cliente do Cognito na aba 'Integração da Aplicação', sessáo 'Análise e clientes de aplicação'
+    2. Mude o ClientId do cognito -> arquivo lambda_auth.py (client_id)
+5. Faça deploy da Lambda novamente
+
+> Subindo a Infraestrutura do projeto (Api Gateway e Cognito User Pools)
+1. Ajuste o bucket para armazenamento de estado **Repositório da Infra**
+    1.   backend "s3" { bucket  = "${SEU BUCKET}" ... } -> arquivo main.tf
+2. Ajuste variáveis e segredos de Actions para CI/CD no arquivo terraform.tfvars
+3. Suba infraestrutura via CICD do repositório (Api Gateway e Cognito User Pools)
+4. Ajuste um bug do autorizador do API Gateway que mostra erro 500 e mensagem ‘null’:
+    1. Vá em ‘Autorizadores’
+    2. Selecione ‘lambda_authorizer_cpf’ e editar
+    3. Escolha a função lambda da lista
+    4. Salve alterações
+    5. Realize deploy da API no estágio ("Implantar API")
+5. Teste a conexão chamando o DNS do loadbalancer na url: ``{DNS Load Balancer}/actuator/health``
+6. Obtenha endereço do stage do API Gateway no console para realizar chamadas
+    1. Vá em API Gateway > api_gateway_fiap_postech > estágios > pegar o valor Invoke Url
+
 > (opcional) Criar usuário e utilizar
 1. Crie um usuário utilizando o endpoint POST '/clients'
 2. O username será o cpf informado
@@ -141,3 +156,9 @@ Passo-a-passo:
 Ex. de chamada:
 ![](misc/chamada_gateway_exemplo.png)
 
+## Autores
+
+Giovanna Albuquerque: @GHBAlbuquerque (https://github.com/GHBAlbuquerque)
+FIAP: @FIAP Software Architecture (https://postech.fiap.com.br/curso/software-architecture/
+
+Feito em 2024
