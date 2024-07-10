@@ -110,30 +110,34 @@ Passo-a-passo:
 <br/>
 
 > Subindo a App de Cliente
-1. TBD
-2. Corrigir DB_HOST mudando o endpoint do RDS no arquivo manifest
-```
-1. Abra o **Repositório da App**
-2. Ajuste segredos de Actions para CI/CD no repositório
-3. Ajuste URI do repositório remoto ECR AWS (accountid e region) no repositório da aplicação, arquivo infra-kubernetes/manifest.yaml
-4. Suba a aplicação via CI/CD do repositório
-5. Verifique componentes em execução na AWS
-6. Obtenha url do estágio no API Gateway para realizar chamadas -> API Gateway / APIs / api_gateway_fiap_postech (xxxxx) / Estágios : Invocar URL
-7. Para chamar o swagger da aplicação e ver os endpoints disponíveis, acesse: {{gateway_url}}/swagger-ui/index
-8. Para realizar chamadas aos endpoints http do gateway, utilize os seguintes headers:
-   1. cpf_cliente -> valor cadastrado previamente: 93678719023
-   2. senha_cliente -> valor cadastrado previamente: FIAPauth123_
-```
+1. No arquivo infra-kubernetes/manifest.yaml, no Deployment, em spec.templates.spec.containers.image:
+   1. Ajuste URI do repositório remoto ECR AWS (accountid e region)
+2. No arquivo infra-kubernetes/manifest.yaml, no Deployment, em spec.templates.spec.containers.env:
+   1. Corrija DB_HOST mudando o endpoint do RDS 
+   2. Corrija COGNITO_ID mudando o valor do ClientId do Cognito
+3. Suba a aplicação via CI/CD do repositório
+4. Use o comando ``aws eks --region us-east-1  update-kubeconfig --name eks_cluster_fiap_postech`` no terminal para acessar seu cluster. Digite 'k9s' para visualizar e gerenciar pods em execução.
 
 <br/>
 
 > Subindo a App de Produto
-1. TBD
+1. No arquivo infra-kubernetes/manifest.yaml, no Deployment, em spec.templates.spec.containers.image:
+   1. Ajuste URI do repositório remoto ECR AWS (accountid e region)
+2. Suba a aplicação via CI/CD do repositório
+3. Use o comando ``aws eks --region us-east-1  update-kubeconfig --name eks_cluster_fiap_postech`` no terminal para acessar seu cluster. Digite 'k9s' para visualizar e gerenciar pods em execução.
+
 
 <br/>
 
 > Subindo a App de Pedido
-1. TBD
+1. No arquivo infra-kubernetes/manifest.yaml, no Deployment, em spec.templates.spec.containers.image:
+   1. Ajuste URI do repositório remoto ECR AWS (accountid e region)
+2. No arquivo infra-kubernetes/manifest.yaml, no Deployment, em spec.templates.spec.containers.env:
+   1. Corrija MS_PRODUTO_URL, passando o valor do DNS do Loadbalancer
+   2. Corrija MS_CLIENTE_URL, passando o valor do DNS do Loadbalancer
+3. Suba a aplicação via CI/CD do repositório
+4. Use o comando ``aws eks --region us-east-1  update-kubeconfig --name eks_cluster_fiap_postech`` no terminal para acessar seu cluster. Digite 'k9s' para visualizar e gerenciar pods em execução.
+
 
 <br/>
 
@@ -162,7 +166,10 @@ Passo-a-passo:
     5. Realize deploy da API no estágio ("Implantar API")
 5. Teste a conexão chamando o DNS do loadbalancer na url: ``{DNS Load Balancer}/actuator/health``
 6. Obtenha endereço do stage do API Gateway no console para realizar chamadas
-    1. Vá em API Gateway > api_gateway_fiap_postech > estágios > pegar o valor Invoke Url
+    1. Vá em API Gateway > api_gateway_fiap_postech > estágios > pegar o valor 'Invoke Url'
+7. Para realizar chamadas aos endpoints http do gateway, utilize os seguintes headers:
+   1. cpf_cliente -> valor cadastrado previamente: 93678719023
+   2. senha_cliente -> valor cadastrado previamente: FIAPauth123_
 
 <br/>
 
@@ -175,6 +182,16 @@ Passo-a-passo:
 
 Ex. de chamada:
 ![](misc/chamada_gateway_exemplo.png)
+
+<br/>
+
+### Algumas regras:
+1. É necessário um cliente corretamente cadastrado no Cognito para realizar chamadas
+2. CPF precisa ser único
+3. A requisição para novo Pedido precisa ter um cliente cadastrado para criar um pedido (validado através do customerId)
+4. A requisição para novo Pedido precisa ter um produto cadastrado para criar um pedido (validado através do productId)
+5. O valor unitário do produto na requisição precisa estar correto (validado com o produto cadatrado)
+
 
 <br/>
 
