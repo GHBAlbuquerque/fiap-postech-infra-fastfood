@@ -59,6 +59,7 @@ Compõem esta entrega:
 > * Repositório da App de Pedido
 >    * https://github.com/GHBAlbuquerque/fiap-postech-fastfood-pedido
 
+<br/>
 
 ### 💿 Getting started - Rodando com CICD e infra descentralizada na Cloud AWS
 
