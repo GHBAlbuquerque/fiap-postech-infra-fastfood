@@ -181,7 +181,7 @@ Passo-a-passo:
 OU
 
 1. Abra o arquivo misc/openapi.html no seu navegador
-2. Veja os endpoints disponíveis para a API7. 
+2. Veja os endpoints disponíveis para a API
 3. Para realizar chamadas aos endpoints http do gateway, utilize a 'Invoke URL'e os seguintes headers:
    1. cpf_cliente -> valor cadastrado previamente: 93678719023
    2. senha_cliente -> valor cadastrado previamente: FIAPauth123_
