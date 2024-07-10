@@ -205,7 +205,7 @@ Ex. de chamada:
 2. CPF precisa ser único
 3. A requisição para novo Pedido precisa ter um cliente cadastrado para criar um pedido (validado através do customerId)
 4. A requisição para novo Pedido precisa ter um produto cadastrado para criar um pedido (validado através do productId)
-5. O valor unitário do produto na requisição precisa estar correto (validado com o produto cadatrado)
+5. O valor unitário do produto na requisição precisa estar correto (validado com o produto cadastrado)
 
 
 <br/>
