@@ -77,6 +77,8 @@ Passo-a-passo:
 2. Altere credenciais nos secrets para actions dos repositórios
 3. Altere credenciais no arquivo .credentials na pasta .aws no seu computador caso deseje rodar a aplicação localmente ou usar o aws cli
 
+<br/>
+
 > Subindo a Infraestrutura do projeto (LoadBalancer, Security Group e EKS Cluster)
 1. Ajuste o bucket para armazenamento de estado **Repositório da Infra EKS**
     1.   backend "s3" { bucket  = "${SEU BUCKET}" ... } -> arquivo main.tf
@@ -86,11 +88,15 @@ Passo-a-passo:
    1. Libere 'Todo o Tráfego' para a VPC (ver CIDR)
    2. Libere 'Todo o Tráfego' para o Security Group criado manualmente e usado no ALB (obter id do security group)
 
+<br/>
+
 > Subindo as tabelas Dynamo
 1. Ajuste o bucket para armazenamento de estado **Repositório das Tabelas Dynamo**
     1.   backend "s3" { bucket  = "${SEU BUCKET}" ... } -> arquivo main.tf
 2. Ajuste variáveis e segredos de Actions para CI/CD no arquivo terraform.tfvars
 3. Suba infraestrutura via CICD do repositório
+
+<br/>
 
 > Subindo o Banco de Dados RDS
 1. Ajuste o bucket para armazenamento de estado **Repositório da Base de Dados RDS**
@@ -98,6 +104,7 @@ Passo-a-passo:
 2. Ajuste variáveis e segredos de Actions para CI/CD no arquivo terraform.tfvars
 3. Suba infraestrutura via CICD do repositório
 
+<br/>
 
 > Subindo a App de Cliente
 1. TBD
@@ -115,11 +122,17 @@ Passo-a-passo:
    2. senha_cliente -> valor cadastrado previamente: FIAPauth123_
 ```
 
+<br/>
+
 > Subindo a App de Produto
 1. TBD
 
+<br/>
+
 > Subindo a App de Pedido
 1. TBD
+
+<br/>
 
 > Subindo a Lambda de Autenticação
 1. Ajuste o bucket para armazenamento de estado **Repositório da Lambda de Autenticação**
@@ -130,6 +143,8 @@ Passo-a-passo:
     1. Obtenha o ID do Cliente do Cognito na aba 'Integração da Aplicação', sessáo 'Análise e clientes de aplicação'
     2. Mude o ClientId do cognito -> arquivo lambda_auth.py (client_id)
 5. Faça deploy da Lambda novamente
+
+<br/>
 
 > Subindo a Infraestrutura do projeto (Api Gateway e Cognito User Pools)
 1. Ajuste o bucket para armazenamento de estado **Repositório da Infra**
@@ -146,6 +161,8 @@ Passo-a-passo:
 6. Obtenha endereço do stage do API Gateway no console para realizar chamadas
     1. Vá em API Gateway > api_gateway_fiap_postech > estágios > pegar o valor Invoke Url
 
+<br/>
+
 > (opcional) Criar usuário e utilizar
 1. Crie um usuário utilizando o endpoint POST '/clients'
 2. O username será o cpf informado
@@ -156,9 +173,12 @@ Passo-a-passo:
 Ex. de chamada:
 ![](misc/chamada_gateway_exemplo.png)
 
+<br/>
+
 ## Autores
 
-Giovanna Albuquerque: @GHBAlbuquerque (https://github.com/GHBAlbuquerque)
-FIAP: @FIAP Software Architecture (https://postech.fiap.com.br/curso/software-architecture/
+*Giovanna Albuquerque* [@GHBAlbuquerque](https://github.com/GHBAlbuquerque)
+
+*FIAP*  [@FIAP Software Architecture](https://postech.fiap.com.br/curso/software-architecture/)
 
 Feito em 2024
