@@ -43,7 +43,7 @@ Tecnologias utilizadas no projeto:
 
 <br/>
 
-### 💿 Getting started - Rodando com CICD e infra descentralizada na Cloud AWS
+### 💿 Getting started - Rodando com CI/CD e infra descentralizada na Cloud AWS
 
 Para visualizar todos os repositórios da entrega e as instruções detalhadas de como rodar este projeto, leia **[este guia](https://github.com/GHBAlbuquerque/fiap-postech-fastfood-orquestrador?tab=readme-ov-file#-como-executar-este-projeto).**
 
