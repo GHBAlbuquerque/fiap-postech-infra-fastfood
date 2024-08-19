@@ -834,7 +834,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "POST",
               "payloadFormatVersion" : "1.0",
               "requestParameters" : {
-                "integration.request.header.microsservice" : "'ms_pedido'"
+                "integration.request.header.microsservice" : "'ms_orquestrador'"
               },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/orders"
@@ -1083,10 +1083,10 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             }
           }
         },
-        "/checkout" : {
+        "/payment" : {
           "get" : {
             "tags" : [
-              "checkout-controller"
+              "payment-controller"
             ],
             "operationId" : "findAll",
             "parameters" : [
@@ -1155,7 +1155,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                     "schema" : {
                       "type" : "array",
                       "items" : {
-                        "$ref" : "#/components/schemas/CheckoutResponse"
+                        "$ref" : "#/components/schemas/PaymentResponse"
                       }
                     }
                   }
@@ -1167,99 +1167,10 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
               "requestParameters" : {
-                "integration.request.header.microsservice" : "'ms_pedido'"
+                "integration.request.header.microsservice" : "'ms_pagamento'"
               },
               "type" : "HTTP_PROXY",
-              "uri" : "http://${local.load_balancer_dns}/checkout"
-            }
-          },
-          "post" : {
-            "tags" : [
-              "checkout-controller"
-            ],
-            "operationId" : "checkout",
-            "requestBody" : {
-              "content" : {
-                "application/json" : {
-                  "schema" : {
-                    "$ref" : "#/components/schemas/CheckoutRequest"
-                  }
-                }
-              },
-              "required" : true
-            },
-            "responses" : {
-              "400" : {
-                "description" : "Bad Request",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
-                  }
-                }
-              },
-              "403" : {
-                "description" : "Forbidden",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
-                  }
-                }
-              },
-              "404" : {
-                "description" : "Not Found",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
-                  }
-                }
-              },
-              "500" : {
-                "description" : "Internal Server Error",
-                "content" : {
-                  "application/json" : {
-                    "schema" : {
-                      "$ref" : "#/components/schemas/ExceptionDetails"
-                    }
-                  }
-                }
-              },
-              "200" : {
-                "description" : "Success"
-              }
-            },
-            "parameters" : [
-              {
-                "name" : "cpf_cliente",
-                "in" : "header",
-                "required" : true,
-                "schema" : {
-                  "type" : "string"
-                }
-              },
-              {
-                "name" : "senha_cliente",
-                "in" : "header",
-                "required" : true,
-                "schema" : {
-                  "type" : "string"
-                }
-              }
-            ],
-            "security" : [{ "lambda_authorizer_cpf" : [] }],
-            "x-amazon-apigateway-integration" : {
-              "httpMethod" : "POST",
-              "payloadFormatVersion" : "1.0",
-              "requestParameters" : {
-                "integration.request.header.microsservice" : "'ms_pedido'"
-              },
-              "type" : "HTTP_PROXY",
-              "uri" : "http://${local.load_balancer_dns}/checkout"
+              "uri" : "http://${local.load_balancer_dns}/payment"
             }
           }
         },
@@ -1545,14 +1456,6 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "type" : "object",
             "properties" : { "cpf" : { "type" : "string" }, "code" : { "type" : "string" } }
           },
-          "CheckoutRequest" : {
-            "type" : "object",
-            "properties" : {
-              "orderId" : {
-                "type" : "string"
-              }
-            }
-          },
           "GetOrderResponse" : {
             "type" : "object",
             "properties" : {
@@ -1637,7 +1540,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               }
             }
           },
-          "CheckoutResponse" : {
+          "PaymentResponse" : {
             "type" : "object",
             "properties" : {
               "id" : {
