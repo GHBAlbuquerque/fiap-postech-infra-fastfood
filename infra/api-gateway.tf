@@ -826,7 +826,14 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 }
               },
               "200" : {
-                "description" : "Success"
+                "description" : "Success",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/CreateOrderResponse"
+                    }
+                  }
+                }
               }
             },
             "security" : [{ "lambda_authorizer_cpf" : [] }],
@@ -1399,6 +1406,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
           "CreateOrderRequest" : {
             "type" : "object",
             "properties" : {
+              "customerId": {
+                "type" : "string"
+              },
               "items" : {
                 "type" : "array",
                 "items" : {
@@ -1422,6 +1432,20 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               },
               "totalItemValue" : {
                 "type" : "number"
+              }
+            }
+          },
+          "CreateOrderResponse" : {
+            "type" : "object",
+            "properties" : {
+              "customerId": {
+                "type" : "string"
+              },
+              "items" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Item"
+                }
               }
             }
           },
