@@ -1218,7 +1218,7 @@
         }
       }
     },
-    "/payment": {
+    "/payments": {
       "get": {
         "tags": [
           "payment-controller"
@@ -1314,7 +1314,7 @@
             "integration.request.header.microsservice": "'ms_pagamento'"
           },
           "type": "HTTP_PROXY",
-          "uri": "http://${local.load_balancer_dns}/payment"
+          "uri": "http://${local.load_balancer_dns}/payments"
         }
       }
     },

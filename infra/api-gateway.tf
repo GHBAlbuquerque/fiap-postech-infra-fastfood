@@ -1090,7 +1090,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             }
           }
         },
-        "/payment" : {
+        "/payments" : {
           "get" : {
             "tags" : [
               "payment-controller"
@@ -1177,7 +1177,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 "integration.request.header.microsservice" : "'ms_pagamento'"
               },
               "type" : "HTTP_PROXY",
-              "uri" : "http://${local.load_balancer_dns}/payment"
+              "uri" : "http://${local.load_balancer_dns}/payments"
             }
           }
         },
