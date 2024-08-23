@@ -952,7 +952,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "content" : {
                 "application/json" : {
                   "schema" : {
-                    "$ref" : "#/components/schemas/RegisterClientRequest"
+                    "$ref" : "#/components/schemas/RegisterCustomerRequest"
                   }
                 }
               },
@@ -1022,7 +1022,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 "content" : {
                   "application/json" : {
                     "schema" : {
-                      "$ref" : "#/components/schemas/RegisterClientResponse"
+                      "$ref" : "#/components/schemas/RegisterCustomerResponse"
                     }
                   }
                 }
@@ -1039,6 +1039,100 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             }
           }
         },
+        "/customers/{id}" : {
+          "delete" : {
+            "tags" : [
+              "customer-controller"
+            ],
+            "operationId" : "deactivateCustomer",
+            "parameters" : [
+              {
+                "name" : "id",
+                "in" : "path",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "cpf_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              {
+                "name" : "senha_cliente",
+                "in" : "header",
+                "required" : true,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            ],
+            "responses" : {
+              "400" : {
+                "description" : "Bad Request",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "403" : {
+                "description" : "Forbidden",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "404" : {
+                "description" : "Not Found",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "500" : {
+                "description" : "Internal Server Error",
+                "content" : {
+                  "application/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ExceptionDetails"
+                    }
+                  }
+                }
+              },
+              "200" : {
+                "description" : "Success"
+              },
+              "default": {
+                "headers": {},
+                "content": {},
+                "description": ""
+              }
+            },
+            "security" : [{ "lambda_authorizer_cpf" : [] }],
+            "x-amazon-apigateway-integration" : {
+              "httpMethod" : "DELETE",
+              "payloadFormatVersion" : "1.0",
+              "requestParameters" : {
+                "integration.request.header.microsservice" : "'ms_cliente'"
+              },
+              "type" : "HTTP_PROXY",
+              "uri" : "http://${local.load_balancer_dns}/customers"
+            }
+          }
+        }
         "/customers/confirmation" : {
           "post" : {
             "tags" : ["customer-controller"], "operationId" : "confirmSignUp",
@@ -1406,7 +1500,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
           "CreateOrderRequest" : {
             "type" : "object",
             "properties" : {
-              "customerId": {
+              "customerId" : {
                 "type" : "string"
               },
               "items" : {
@@ -1438,7 +1532,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
           "CreateOrderResponse" : {
             "type" : "object",
             "properties" : {
-              "customerId": {
+              "customerId" : {
                 "type" : "string"
               },
               "items" : {
@@ -1449,7 +1543,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               }
             }
           },
-          "RegisterClientRequest" : {
+          "RegisterCustomerRequest" : {
             "type" : "object",
             "properties" : {
               "name" : {
@@ -1467,7 +1561,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               }
             }
           },
-          "RegisterClientResponse" : {
+          "RegisterCustomerResponse" : {
             "type" : "object",
             "properties" : {
               "id" : {
