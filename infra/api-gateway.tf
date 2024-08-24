@@ -1131,7 +1131,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
                 "integration.request.header.senha_cliente" : "method.request.header.senha_cliente"
               },
               "type" : "HTTP_PROXY",
-              "uri" : "http://${local.load_balancer_dns}/customers"
+              "uri" : "http://${local.load_balancer_dns}/customers/{id}"
             }
           }
         }
