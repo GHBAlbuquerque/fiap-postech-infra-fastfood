@@ -262,7 +262,8 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
             "x-amazon-apigateway-integration" : {
               "httpMethod" : "GET",
               "requestParameters" : {
-                "integration.request.header.microsservice" : "'ms_produto'"
+                "integration.request.header.microsservice" : "'ms_produto'",
+                "integration.request.path.id" : "method.request.path.id"
               },
               "payloadFormatVersion" : "1.0",
               "type" : "HTTP_PROXY",
@@ -367,7 +368,8 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "PUT",
               "payloadFormatVersion" : "1.0",
               "requestParameters" : {
-                "integration.request.header.microsservice" : "'ms_produto'"
+                "integration.request.header.microsservice" : "'ms_produto'",
+                "integration.request.path.id" : "method.request.path.id"
               },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/products/{id}"
@@ -454,7 +456,8 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "DELETE",
               "payloadFormatVersion" : "1.0",
               "requestParameters" : {
-                "integration.request.header.microsservice" : "'ms_produto'"
+                "integration.request.header.microsservice" : "'ms_produto'",
+                "integration.request.path.id" : "method.request.path.id"
               },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/products/{id}"
@@ -1128,7 +1131,8 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "requestParameters" : {
                 "integration.request.header.microsservice" : "'ms_cliente'",
                 "integration.request.header.cpf_cliente" : "method.request.header.cpf_cliente",
-                "integration.request.header.senha_cliente" : "method.request.header.senha_cliente"
+                "integration.request.header.senha_cliente" : "method.request.header.senha_cliente",
+                "integration.request.path.id" : "method.request.path.id"
               },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/customers/{id}"
@@ -1366,6 +1370,7 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "GET",
               "payloadFormatVersion" : "1.0",
               "requestParameters" : {
+                "integration.request.path.orderId" : "method.request.path.orderId",
                 "integration.request.header.microsservice" : "'ms_pedido'"
               },
               "type" : "HTTP_PROXY",
