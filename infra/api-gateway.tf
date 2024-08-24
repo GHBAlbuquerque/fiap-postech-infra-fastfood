@@ -1115,10 +1115,10 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "200" : {
                 "description" : "Success"
               },
-              "default": {
-                "headers": {},
-                "content": {},
-                "description": ""
+              "default" : {
+                "headers" : {},
+                "content" : {},
+                "description" : ""
               }
             },
             "security" : [{ "lambda_authorizer_cpf" : [] }],
@@ -1126,7 +1126,9 @@ resource "aws_api_gateway_rest_api" "api_gateway_fiap_postech" {
               "httpMethod" : "DELETE",
               "payloadFormatVersion" : "1.0",
               "requestParameters" : {
-                "integration.request.header.microsservice" : "'ms_cliente'"
+                "integration.request.header.microsservice" : "'ms_cliente'",
+                "integration.request.header.cpf_cliente" : "method.request.header.cpf_cliente",
+                "integration.request.header.senha_cliente" : "method.request.header.senha_cliente"
               },
               "type" : "HTTP_PROXY",
               "uri" : "http://${local.load_balancer_dns}/customers"
